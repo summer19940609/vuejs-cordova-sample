@@ -5,6 +5,12 @@ import './plugins/vuetify-extra';
 import App from './App.vue';
 import router from './router/index';
 import i18n from './i18n';
+import Vant from 'vant';
+import axios from 'axios';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
+Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
 

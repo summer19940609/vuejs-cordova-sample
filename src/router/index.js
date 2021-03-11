@@ -6,35 +6,46 @@ import Flash from '@/views/Flash'
 import Camera from '@/views/Camera'
 import Nfc from '@/views/Nfc'
 import Localisation from '@/views/Localisation'
+import Fund from '@/views/Fund'
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home
-    },{
-      path: '/vibration',
-      name: 'Vibration',
-      component: Vibration
-    },{
-      path: '/flash',
-      name: 'Flash',
-      component: Flash
-    },{
-      path: '/camera',
-      name: 'Camera',
-      component: Camera
-    },{
-      path: '/nfc',
-      name: 'Nfc',
-      component: Nfc
-    },{
-      path: '/localisation',
-      name: 'Localisation',
-      component: Localisation
-    }
-  ]
+    routes: [
+        {
+            path: '/',
+            name: 'Home',
+            component: Home
+        },
+        {
+            path: '/vibration',
+            name: 'Vibration',
+            component: Vibration
+        },
+        {
+            path: '/flash',
+            name: 'Flash',
+            component: Flash
+        },
+        {
+            path: '/camera',
+            name: 'Camera',
+            component: Camera
+        },
+        {
+            path: '/nfc',
+            name: 'Nfc',
+            component: Nfc
+        },
+        {
+            path: '/localisation',
+            name: 'Localisation',
+            component: Localisation
+        },
+        {
+            path: '/fund',
+            name: 'Fund',
+            component: Fund
+        }
+    ]
 })
