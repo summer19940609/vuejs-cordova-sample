@@ -2,6 +2,7 @@
     <v-container text-center class="fund-container">
         <van-pull-refresh
             v-model="isLoading"
+            success-text="刷新成功"
             @refresh="onRefresh"
             class="refresh-box"
         >
@@ -183,9 +184,7 @@ export default {
             };
         },
         mounted() {
-            console.log('111111111111');
-            console.log('====> 1的值为: ', 1);
-            this.getFundIndex();
+
         },
         openMenu: () => {
             document.dispatchEvent(new CustomEvent('toggleDrawer', {}));
@@ -195,22 +194,20 @@ export default {
                 this.isLoading = false;
             }, 1000);
         },
-        getFundIndex: () => {
-            this.$axios
-                .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-                .then((data) => console.log('====> data的值为: ', data));
-        },
+        // 同步浏览器接口数据
+
     },
 };
 </script>
 
 <style scoped>
 .refresh-box {
-    height: 100%;
+    -webkit-overflow-scrolling: touch
 }
 .fund-index-box {
-    margin-top: 10px;
     font-size: 16px;
+    background-color: #dde1ea;
+    padding: 10px;
 }
 .fund-detail-box {
     margin-top: 20px;
@@ -219,7 +216,7 @@ export default {
     background-color: #e0e0e0;
     border: 10px solid #e0e0e0;
     padding: 10px;
-    margin-top: 10px;
+    margin: 0 0 10px 0;
 }
 .fund-detail-fs {
     text-align: left;
