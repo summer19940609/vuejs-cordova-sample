@@ -33,10 +33,10 @@
                         :key="fund.code"
                     >
                         <van-row>
-                            <van-col span="20" style="text-align: left"
+                            <van-col span="20" style="text-align: left;font-weight: 400;"
                                 >{{ fund.SHORTNAME }} {{ fund.code }}
                             </van-col>
-                            <van-col span="4" style="text-align: right">更新时间</van-col>
+                            <van-col span="4" style="text-align: right">{{ fund.GZTIME }}</van-col>
                         </van-row>
                         <van-row>
                             <van-col span="8" class="fund-detail-fs">
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
     name: 'fund',
     data() {
@@ -105,6 +106,7 @@ export default {
                 v = { ...v, ...fund };
                 v['CYJE'] = (v.num * v.NAV).toFixed(2);     // 持有金额
                 v['GSSY'] = (v.CYJE * v.GSZZL /100).toFixed(2);     // 估算收益
+                v['GZTIME'] = dayjs(v.GZTIME).format('HH:mm');
                 return v
             });
             this.fundList = x2rrFundList

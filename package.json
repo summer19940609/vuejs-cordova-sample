@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
     "leaflet": "^1.5.1",
     "material-design-icons-iconfont": "^5.0.1",
     "roboto-fontface": "^0.10.0",
