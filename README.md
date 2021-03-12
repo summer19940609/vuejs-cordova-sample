@@ -1,11 +1,4 @@
 # vuejs-cordova-sample
-
-[![Build Status](https://travis-ci.org/c4software/vuejs-cordova-sample.svg?branch=master)](https://travis-ci.org/c4software/vuejs-cordova-sample)
-
-> Sample VueJS app thats use Cordova capabilities
-
-![Demo screenshot](demo.png)
-
 ## Build Setup
 
 ```bash
