@@ -32,11 +32,6 @@
                     <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncome }}</span>
                     <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}</span>
                 </div>
-                <!-- <van-row class="fund-sum-box">
-                    <van-col span="8">日收益</van-col>
-                    <van-col span="8" :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncome }}</van-col>
-                    <van-col span="8" :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}%</van-col>
-                </van-row> -->
                 <!-- 基金当日详情 -->
                 <div class="fund-detail-box">
                     <div
