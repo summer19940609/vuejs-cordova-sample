@@ -20,4 +20,4 @@ yarn-error.log*
 *.sln
 *.sw*
 
-/cordova_app/*
+cordova_app

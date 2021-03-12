@@ -33,7 +33,7 @@
                         :key="fund.code"
                     >
                         <van-row>
-                            <van-col span="20" style="text-align: left;font-weight: 400;"
+                            <van-col span="20" style="text-align: left;font-weight: 500;"
                                 >{{ fund.SHORTNAME }} {{ fund.code }}
                             </van-col>
                             <van-col span="4" style="text-align: right">{{ fund.GZTIME }}</van-col>
