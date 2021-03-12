@@ -1,6 +1,6 @@
 {
   "title": "摸鱼王",
-  "showSample": "Afficher les examples",
+  "showSample": "侧边栏",
   "drawer": {
     "home": "Accueil",
     "vibration": "Vibreur",
@@ -10,8 +10,6 @@
     "nfc": "Nfc",
     "fund": "基金"
   },
-  "see_on_github": "Voir sur Github",
-  "getPosition": "Localisation en cours",
   "positionNotAvailable": "Localisation impossible",
   "startVibration": "Démarrer la vibration",
   "flashlight": {
@@ -27,6 +25,6 @@
     "history": "Historique",
     "noHistory": "Aucun historique"
   },
-  "takePhoto": "Prendre une photo",
-  "error": "Non disponible"
+  "takePhoto": "开始拍照",
+  "error": "出错了"
 }
