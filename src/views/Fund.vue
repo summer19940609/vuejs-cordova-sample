@@ -36,7 +36,7 @@
                             <van-col span="20" style="text-align: left"
                                 >{{ fund.SHORTNAME }} {{ fund.code }}
                             </van-col>
-                            <van-col span="4" style="text-align: right">bb</van-col>
+                            <van-col span="4" style="text-align: right">更新时间</van-col>
                         </van-row>
                         <van-row>
                             <van-col span="8" class="fund-detail-fs">
