@@ -1,16 +1,8 @@
 <template>
     <v-container text-center class="fund-container">
-        <van-pull-refresh
-            v-model="isLoading"
-            success-text="刷新成功"
-            @refresh="onRefresh"
-            class="refresh-box"
-        >
+        <van-pull-refresh v-model="isLoading" success-text="刷新成功" @refresh="onRefresh" class="refresh-box" >
             <div class="fund-index-box">
-                <van-row
-                    v-for="fundIndex in fundIndexList"
-                    :key="fundIndex.f12"
-                >
+                <van-row v-for="fundIndex in fundIndexList" :key="fundIndex.f12" >
                     <van-col span="6">{{ fundIndex.f14 }}</van-col>
                     <van-col span="6">{{ fundIndex.f2 }}</van-col>
                     <van-col
@@ -34,12 +26,7 @@
                 </div>
                 <!-- 基金当日详情 -->
                 <div class="fund-detail-box">
-                    <div
-                        class="fund-detail-item"
-                        v-for="fund in fundList"
-                        :key="fund.code"
-                    >
-                        <van-row>
+                    <div class="fund-detail-item" v-for="fund in fundList" :key="fund.code" > <van-row>
                             <van-col span="20" style="text-align: left;font-weight: 500;"
                                 >{{ fund.SHORTNAME }} {{ fund.code }}
                             </van-col>
