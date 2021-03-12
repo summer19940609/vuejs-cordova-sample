@@ -11,9 +11,11 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run serve
+或者 yarn serve
 
 # build for production to run in Cordova
 npm run build
+或者 yarn build
 
 ```
 
