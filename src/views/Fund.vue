@@ -70,7 +70,7 @@
 import dayjs from 'dayjs'
 export default {
     name: 'fund',
-    data () {
+    data() {
         return {
             isLoading: false,
             fundList: [],       // 页面个人基金展示信息
@@ -78,7 +78,7 @@ export default {
             skeletonLoading: true,      // 控制骨架屏显示
         };
     },
-    mounted () {
+    mounted() {
         this.getFundIndexData();
         this.initData();
     },
@@ -87,7 +87,7 @@ export default {
             document.dispatchEvent(new CustomEvent('toggleDrawer', {}));
         },
         // 下拉刷新
-        onRefresh () {
+        onRefresh() {
             const currTime = dayjs().format('HH:mm')
             if (currTime < '15:00') {
                 this.getFundIndexData();
@@ -98,7 +98,7 @@ export default {
             }, 1000);
         },
         // 整合数据，展示
-        async initData () {
+        async initData() {
             let x2rrFundList = localStorage.getItem('x2rrFundList')
             if (x2rrFundList && JSON.parse(x2rrFundList)) {
                 x2rrFundList = JSON.parse(x2rrFundList);
@@ -126,7 +126,7 @@ export default {
             this.skeletonLoading = false
         },
         // 同步浏览器接口数据
-        getX2rrFundsData (username, password) {
+        getX2rrFundsData(username, password) {
             return new Promise((resolve, reject) => {
                 this.$axios
                     .post(
@@ -153,7 +153,7 @@ export default {
             })
         },
         // 获取指数
-        getFundIndexData () {
+        getFundIndexData() {
             this.$axios
                 .get(
                     'https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&fields=f2,f3,f4,f12,f13,f14&secids=1.000001,1.000300,0.399001,0.399006&_=1615516863425',
@@ -167,7 +167,7 @@ export default {
                 });
         },
         // 获取基金信息
-        getFundInfo (fundCodeList) {
+        getFundInfo(fundCodeList) {
             return new Promise((resolve, reject) => {
                 const url = `https://fundmobapi.eastmoney.com/FundMNewApi/FundMNFInfo?pageIndex=1&pageSize=200&plat=Android&appType=ttjj&product=EFund&Version=1&deviceid=c6a12d28-1e46-46df-bd62-d543d600b464&Fcodes=${fundCodeList.join(',')}`;
                 this.$axios
