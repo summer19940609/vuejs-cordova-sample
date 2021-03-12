@@ -15,23 +15,23 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 const init = () => {
-  new Vue({
-    vuetify,
-    router,
-    i18n,
-    render: h => h(App)
-  }).$mount('#app')
+    new Vue({
+        vuetify,
+        router,
+        i18n,
+        render: h => h(App)
+    }).$mount('#app')
 };
 
 // Wait for the deviceready event to start the render
 document.addEventListener("deviceready", () => {
-  // eslint-disable-next-line
-  console.log("Ready, Render the App");
-  init();
+    // eslint-disable-next-line
+    console.log("Ready, Render the App");
+    init();
 });
 
 // If we are not in Cordova, manually trigger the deviceready event
 const isCordovaApp = (typeof window.cordova !== "undefined");
-if (!isCordovaApp){
-  document.dispatchEvent(new CustomEvent("deviceready", {}));
+if (!isCordovaApp) {
+    document.dispatchEvent(new CustomEvent("deviceready", {}));
 }
