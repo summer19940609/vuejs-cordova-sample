@@ -92,14 +92,12 @@ export default {
         },
         // 整合数据，展示
         async initData(){
-            let x2rrFundList = null;
-            let fundConfig = localStorage.getItem('fundConfig')
-            if (fundConfig && JSON.parse(fundConfig)) {
-                x2rrFundList= JSON.parse(fundConfig);
+            let x2rrFundList = localStorage.getItem('x2rrFundList')
+            if (x2rrFundList && JSON.parse(x2rrFundList)) {
+                x2rrFundList= JSON.parse(x2rrFundList);
             } else {
                 x2rrFundList = await this.getX2rrFundsData('verygoodbye', 'xnj19940609')
             }
-            console.log('====> x2rrFundList的值为: ', x2rrFundList);
             const fundCodeList = x2rrFundList.map(v => v.code);
             const fundInfoList = await this.getFundInfo(fundCodeList);
             x2rrFundList = x2rrFundList.map((v) => {
@@ -130,7 +128,7 @@ export default {
                     console.log('====> 获取x2rr备份的个人基金数据的值为: ', data);
                     const fundConfig = JSON.parse(data.data.userInfo.config_data);
                     const fundList = fundConfig.fundListM;
-                    localStorage.setItem('fundConfig', JSON.stringify(fundConfig))
+                    localStorage.setItem('x2rrFundList', JSON.stringify(fundList))
                     resolve(fundList)
                 })
                 .catch((err) => {
