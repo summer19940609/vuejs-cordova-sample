@@ -26,6 +26,18 @@
                 </van-row>
             </div>
             <van-skeleton animate :row="9" :loading="skeletonLoading" style="margin-top: 20px;">
+                <!-- 预计日收益 -->
+                <div class="fund-sum-box">
+                    <span>日收益</span>
+                    <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncome }}</span>
+                    <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}</span>
+                </div>
+                <!-- <van-row class="fund-sum-box">
+                    <van-col span="8">日收益</van-col>
+                    <van-col span="8" :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncome }}</van-col>
+                    <van-col span="8" :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}%</van-col>
+                </van-row> -->
+                <!-- 基金当日详情 -->
                 <div class="fund-detail-box">
                     <div
                         class="fund-detail-item"
@@ -45,7 +57,7 @@
                                 <span>{{ fund.CYJE }}</span>
                             </van-col>
                             <van-col span="8" class="fund-detail-cy">
-                                <span>持有收益</span>
+                                <!-- <span>持有收益</span> -->
                                 <span></span>
                                 <span></span>
                             </van-col>
@@ -85,8 +97,11 @@ export default {
         },
         // 下拉刷新
         onRefresh() {
-            this.getFundIndexData();
-            this.initData();
+            const currTime = dayjs().format('HH:mm')
+            if (currTime < '15:00') {
+                this.getFundIndexData();
+                this.initData();
+            }
             setTimeout(() => {
                 this.isLoading = false;
             }, 1000);
@@ -101,15 +116,22 @@ export default {
             }
             const fundCodeList = x2rrFundList.map(v => v.code);
             const fundInfoList = await this.getFundInfo(fundCodeList);
+            let dayIncome = 0;
+            let totalMoney = 0;
             x2rrFundList = x2rrFundList.map((v) => {
                 const fund = fundInfoList.find((k) => k['FCODE'] == v.code);
                 v = { ...v, ...fund };
                 v['CYJE'] = (v.num * v.NAV).toFixed(2);     // 持有金额
                 v['GSSY'] = (v.CYJE * v.GSZZL /100).toFixed(2);     // 估算收益
                 v['GZTIME'] = dayjs(v.GZTIME).format('HH:mm');
+                dayIncome += Number(v.GSSY)
+                totalMoney += Number(v.CYJE)
                 return v
             });
             this.fundList = x2rrFundList
+            this.dayIncome = dayIncome.toFixed(2)
+            const dayIncomePercent = ((dayIncome / totalMoney) * 100).toFixed(2)
+            this.dayIncomePercent = dayIncomePercent
             this.skeletonLoading = false
         },
         // 同步浏览器接口数据
@@ -185,9 +207,10 @@ export default {
     font-size: 16px;
     background-color: #dde1ea;
     padding: 10px;
+    margin-top: 10px;
 }
 .fund-detail-box {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .fund-detail-item {
     background-color: #e0e0e0;
@@ -221,5 +244,20 @@ export default {
 }
 .van-skeleton__row {
     height: 50px;
+}
+.fund-sum-box {
+    height: 100px;
+    font-size: 24px;
+    background-color: #e0e0e0;
+    margin-top: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.fund-sum-box span {
+    margin: 0 20px;
+    display: inline-block;
+    line-height: 100px;
+    height: 100px;
 }
 </style>
