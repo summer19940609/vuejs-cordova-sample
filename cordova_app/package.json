@@ -1,8 +1,8 @@
 {
-    "name": "vuejs_cordova_sample",
-    "displayName": "Vue Cordova Sample",
+    "name": "mo-fish",
+    "displayName": "摸鱼",
     "version": "1.0.0",
-    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "description": "无",
     "main": "index.js",
     "scripts": {},
     "author": "Apache Cordova Team",
