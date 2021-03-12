@@ -1,5 +1,9 @@
-# vuejs-cordova-sample
-## Build Setup
+# vue + cordova
+
+![FF96UO](https://cdn.jsdelivr.net/gh/summer19940609/picture-repo@master/uPic/FF96UO.png)
+
+
+## 步骤
 
 ```bash
 # install dependencies
@@ -13,7 +17,7 @@ npm run build
 
 ```
 
-## First Cordova build
+## 第一次cordova build
 
 Run the command :
 
@@ -24,13 +28,13 @@ cordova platform add android
 cordova run # or build
 ```
 
-## Next Cordova build
+## 后续Cordova build
 
 ```sh
 npm run cordova_run # or cordova_build
 ```
 
-## Plugins
+## cordova插件
 
 - cordova-plugin-dialogs
 - cordova-plugin-vibration
