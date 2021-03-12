@@ -30,7 +30,7 @@
                 <div class="fund-sum-box">
                     <span>日收益</span>
                     <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncome }}</span>
-                    <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}</span>
+                    <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}%</span>
                 </div>
                 <!-- 基金当日详情 -->
                 <div class="fund-detail-box">
