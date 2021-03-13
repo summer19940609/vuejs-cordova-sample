@@ -23,9 +23,5 @@ export default {
 </script>
 
 <style scoped>
-img.logo {
-    display: inline-block;
-    width: 90px;
-    padding: 20px;
-}
+
 </style>
