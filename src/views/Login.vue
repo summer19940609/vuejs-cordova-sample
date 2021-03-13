@@ -24,25 +24,28 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
 export default {
     name: 'login',
     data() {
         return {
-            username: '',
-            password: '',
+            
         };
     },
     mounted() {
 
     },
     methods: {
-        onSubmit({ username, password }) {
-            console.log('====> submit的值为: ');
-            this.getX2rrFundsData(username, password)
+        async onSubmit({ username, password }) {
+            const { err, data } = await this.getX2rrFundsData(username, password)
+            if (err) {
+                this.$toast.fail(err)
+                return
+            }
+            this.$toast.success('同步成功')
+            this.$router.push('/fund')
         },
         getX2rrFundsData(username, password) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resovle, reject) => {
                 this.$axios
                     .post(
                         'https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center',
@@ -54,22 +57,19 @@ export default {
                             },
                         },
                     )
-                    .then((data) => {
-                        console.log('====> 获取x2rr备份的个人基金数据的值为: ', data);
-                        if (data.data.code != 0) {
-                            this.$toast.fail(data.data.message);
-                            return
+                    .then((res) => {
+                        console.log('====> 获取x2rr备份的个人基金数据的值为: ', res);
+                        if (res.data.code != 0) {
+                            resovle({ 'err': res.data.message, 'data': null })
                         }
-                        const fundConfig = JSON.parse(data.data.userInfo.config_data);
+                        const fundConfig = JSON.parse(res.data.userInfo.config_data)
                         const fundList = fundConfig.fundListM;
                         localStorage.setItem('x2rrFundList', JSON.stringify(fundList))
-                        this.$toast.success('同步成功');
-                        return
+                        resovle({ 'err': null, 'data': fundList })
                     })
                     .catch((err) => {
-                        this.$toast(err);
-                        console.log('====> err的值为: ', err);
-                        return
+                        console.log('====> err的值为: ', err)
+                        reject({ 'err': err, 'data': null })
                     });
             })
         },
@@ -81,5 +81,6 @@ export default {
 .login-container {
     background-color: #f0f2f5;
     height: 100%;
+    padding: 20px 0 0 0 ;
 }
 </style>

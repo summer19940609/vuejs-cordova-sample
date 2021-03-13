@@ -76,6 +76,7 @@ export default {
             fundList: [],       // 页面个人基金展示信息
             fundIndexList: [],      // 大盘指数
             skeletonLoading: true,      // 控制骨架屏显示
+            hasSync: false
         };
     },
     mounted() {
@@ -103,8 +104,9 @@ export default {
             if (x2rrFundList && JSON.parse(x2rrFundList)) {
                 x2rrFundList = JSON.parse(x2rrFundList);
             } else {
-                x2rrFundList = await this.getX2rrFundsData('verygoodbye', 'xnj19940609')
-                if (!x2rrFundList) {
+                const { err, fundList } = await this.getX2rrFundsData('verygoodbye', 'xnj19940609')
+                x2rrFundList = fundList
+                if (err) {
                     this.$toast.fail('同步失败');
                     return
                 }
@@ -128,10 +130,11 @@ export default {
             const dayIncomePercent = ((dayIncome / totalMoney) * 100).toFixed(2)
             this.dayIncomePercent = dayIncomePercent
             this.skeletonLoading = false
+            this.hasSync = true
         },
         // 同步浏览器接口数据
         getX2rrFundsData(username, password) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resovle, reject) => {
                 this.$axios
                     .post(
                         'https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center',
@@ -143,20 +146,20 @@ export default {
                             },
                         },
                     )
-                    .then((data) => {
-                        console.log('====> 获取x2rr备份的个人基金数据的值为: ', data);
-                        if (data.data.code != 0) {
-                            resolve(null)
+                    .then((res) => {
+                        console.log('====> 获取x2rr备份的个人基金数据的值为: ', res);
+                        if (res.data.code != 0) {
+                            resovle({ 'err': res.data.message, 'fundList': null })
                         }
-                        const fundConfig = JSON.parse(data.data.userInfo.config_data);
+                        const fundConfig = JSON.parse(res.data.userInfo.config_data);
                         const fundList = fundConfig.fundListM;
                         localStorage.setItem('x2rrFundList', JSON.stringify(fundList))
-                        resolve(fundList)
+                        resovle({ 'err': null, 'fundList': fundList })
                     })
                     .catch((err) => {
                         this.$toast.fail(err);
                         console.log('====> err的值为: ', err);
-                        reject(err)
+                        reject({ 'err': err, 'fundList': null })
                     });
             })
         },
