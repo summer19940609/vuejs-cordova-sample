@@ -10,7 +10,6 @@
     "dependencies": {
         "cordova-plugin-android-window-background": "^1.0.2",
         "cordova-plugin-camera": "^4.1.0",
-        "cordova-plugin-compat": "^1.2.0",
         "cordova-plugin-dialogs": "^2.0.2",
         "cordova-plugin-flashlight": "^3.2.0",
         "cordova-plugin-geolocation": "^4.0.2",
@@ -33,15 +32,17 @@
             "cordova-plugin-headercolor": {},
             "cordova-plugin-android-window-background": {
                 "WINDOW_BACKGROUND_COLOR": "#ffffff"
-            }
+            },
+            "cordova-plugin-compat": {}
         },
         "platforms": [
-            "android",
-            "ios"
+            "ios",
+            "android"
         ]
     },
     "devDependencies": {
-        "cordova-android": "^8.1.0",
-        "cordova-ios": "^6.2.0"
+        "cordova-android": "^9.0.0",
+        "cordova-ios": "^6.2.0",
+        "cordova-plugin-compat": "^1.2.0"
     }
 }
