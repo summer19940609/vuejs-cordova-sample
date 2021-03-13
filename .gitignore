@@ -23,3 +23,4 @@ yarn-error.log*
 *.sw*
 
 cordova_app/
+*/www/
