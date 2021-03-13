@@ -104,6 +104,10 @@ export default {
                 x2rrFundList = JSON.parse(x2rrFundList);
             } else {
                 x2rrFundList = await this.getX2rrFundsData('verygoodbye', 'xnj19940609')
+                if (!x2rrFundList) {
+                    this.$toast.fail('同步失败');
+                    return
+                }
             }
             const fundCodeList = x2rrFundList.map(v => v.code);
             const fundInfoList = await this.getFundInfo(fundCodeList);
@@ -141,13 +145,16 @@ export default {
                     )
                     .then((data) => {
                         console.log('====> 获取x2rr备份的个人基金数据的值为: ', data);
+                        if (data.data.code != 0) {
+                            resolve(null)
+                        }
                         const fundConfig = JSON.parse(data.data.userInfo.config_data);
                         const fundList = fundConfig.fundListM;
                         localStorage.setItem('x2rrFundList', JSON.stringify(fundList))
                         resolve(fundList)
                     })
                     .catch((err) => {
-                        Toast.fail(err);
+                        this.$toast.fail(err);
                         console.log('====> err的值为: ', err);
                         reject(err)
                     });
@@ -164,7 +171,7 @@ export default {
                     this.fundIndexList = fundIndexList;
                 })
                 .catch((err) => {
-                    Toast.fail(err);
+                    this.$toast.fail(err);
                     console.log('====> err的值为: ', err);
                 });
         },
@@ -181,7 +188,7 @@ export default {
                     })
                     .catch((err) => {
                         console.log('====> err的值为: ', err);
-                        Toast.fail(err);
+                        this.$toast.fail(err);
                         reject(err);
                     });
             });

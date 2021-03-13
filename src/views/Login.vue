@@ -56,14 +56,20 @@ export default {
                     )
                     .then((data) => {
                         console.log('====> 获取x2rr备份的个人基金数据的值为: ', data);
+                        if (data.data.code != 0) {
+                            this.$toast.fail(data.data.message);
+                            return
+                        }
                         const fundConfig = JSON.parse(data.data.userInfo.config_data);
                         const fundList = fundConfig.fundListM;
                         localStorage.setItem('x2rrFundList', JSON.stringify(fundList))
-                        Toast.success('同步成功');
+                        this.$toast.success('同步成功');
+                        return
                     })
                     .catch((err) => {
-                        Toast.fail(err);
+                        this.$toast(err);
                         console.log('====> err的值为: ', err);
+                        return
                     });
             })
         },
