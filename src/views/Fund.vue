@@ -6,7 +6,8 @@
             @refresh="onRefresh"
             class="refresh-box"
         >
-            <div class="fund-index-box">
+            <van-skeleton row-width="[100%,100%,100%,100%]" animate :row="4" :loading="indexSkeletonLoading" style="margin-top: 20px;">
+                <div class="fund-index-box">
                 <van-row v-for="fundIndex in fundIndexList" :key="fundIndex.f12">
                     <van-col span="6">{{ fundIndex.f14 }}</van-col>
                     <van-col span="6">{{ fundIndex.f2 }}</van-col>
@@ -20,7 +21,9 @@
                     >{{ fundIndex.f3 }}%</van-col>
                 </van-row>
             </div>
-            <van-skeleton animate :row="9" :loading="skeletonLoading" style="margin-top: 20px;" v-if="hasSync">
+            </van-skeleton>
+
+            <van-skeleton class="fund-detail-sk" animate :row="9" :loading="skeletonLoading" style="margin-top: 20px;" v-if="hasSync">
                 <!-- 预计日收益 -->
                 <div class="fund-sum-box">
                     <span>日收益</span>
@@ -79,6 +82,7 @@ export default {
             fundList: [],       // 页面个人基金展示信息
             fundIndexList: [],      // 大盘指数
             skeletonLoading: true,      // 控制骨架屏显示
+            indexSkeletonLoading: true,
             hasSync: false
         };
     },
@@ -169,6 +173,7 @@ export default {
                 .then((data) => {
                     const fundIndexList = data.data.data.diff;
                     this.fundIndexList = fundIndexList;
+                    this.indexSkeletonLoading = false
                 })
                 .catch((err) => {
                     this.$toast.fail(err);
@@ -246,7 +251,7 @@ export default {
 .van-skeleton {
     padding: 0;
 }
-.van-skeleton__row {
+.fund-detail-sk .van-skeleton__row {
     height: 50px;
 }
 .fund-sum-box {

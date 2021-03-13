@@ -51,9 +51,4 @@ export default {
     right: 40px;
     bottom: 50px;
 }
-.main-container {
-    /* height: 100vh;
-    position: relative;
-    overflow: auto; */
-}
 </style>
