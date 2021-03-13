@@ -5,11 +5,16 @@ import './plugins/vuetify-extra';
 import App from './App.vue';
 import router from './router/index';
 import i18n from './i18n';
-import Vant from 'vant';
 import axios from 'axios';
-import 'vant/lib/index.css';
+import { Col, Row, PullRefresh, Divider, Skeleton, } from 'vant';
 
-Vue.use(Vant);
+[
+    Col, Row, PullRefresh, Divider, Skeleton
+].forEach(v => {
+    Vue.use(v)
+})
+
+// Vue.use(Vant);
 Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
