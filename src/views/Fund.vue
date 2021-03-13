@@ -20,7 +20,7 @@
                     >{{ fundIndex.f3 }}%</van-col>
                 </van-row>
             </div>
-            <van-skeleton animate :row="9" :loading="skeletonLoading" style="margin-top: 20px;">
+            <van-skeleton animate :row="9" :loading="skeletonLoading" style="margin-top: 20px;" v-if="hasSync">
                 <!-- 预计日收益 -->
                 <div class="fund-sum-box">
                     <span>日收益</span>
@@ -62,6 +62,9 @@
                 </div>
                 <van-divider>到底啦</van-divider>
             </van-skeleton>
+            <van-empty description="还没有同步" v-if="!hasSync">
+                <van-button round type="danger" class="bottom-button" @click="jumpToSync">去同步</van-button>
+            </van-empty>
         </van-pull-refresh>
     </v-container>
 </template>
@@ -101,16 +104,10 @@ export default {
         // 整合数据，展示
         async initData() {
             let x2rrFundList = localStorage.getItem('x2rrFundList')
-            if (x2rrFundList && JSON.parse(x2rrFundList)) {
-                x2rrFundList = JSON.parse(x2rrFundList);
-            } else {
-                const { err, fundList } = await this.getX2rrFundsData('verygoodbye', 'xnj19940609')
-                x2rrFundList = fundList
-                if (err) {
-                    this.$toast.fail('同步失败');
-                    return
-                }
+            if (!x2rrFundList) {
+                return
             }
+            x2rrFundList = JSON.parse(x2rrFundList);
             const fundCodeList = x2rrFundList.map(v => v.code);
             const fundInfoList = await this.getFundInfo(fundCodeList);
             let dayIncome = 0;
@@ -195,6 +192,9 @@ export default {
                         reject(err);
                     });
             });
+        },
+        jumpToSync() {
+            this.$router.push('/login')
         }
     },
 };
