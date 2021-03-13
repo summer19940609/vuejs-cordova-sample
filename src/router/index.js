@@ -7,6 +7,7 @@ import Camera from '@/views/Camera'
 import Nfc from '@/views/Nfc'
 import Localisation from '@/views/Localisation'
 import Fund from '@/views/Fund'
+import Login from '@/views/Login'
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
             path: '/fund',
             name: 'Fund',
             component: Fund
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
         }
     ]
 })

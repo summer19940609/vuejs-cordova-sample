@@ -6,18 +6,10 @@ import App from './App.vue';
 import router from './router/index';
 import i18n from './i18n';
 import axios from 'axios';
-import { Col, Row, PullRefresh, Divider, Skeleton, Toast } from 'vant';
+import Vant from 'vant';
+import 'vant/lib/index.css';
 
-[
-    Col,
-    Row,
-    PullRefresh,
-    Divider,
-    Skeleton,
-    Toast
-].forEach(v => {
-    Vue.use(v)
-})
+Vue.use(Vant);
 
 Vue.prototype.$axios = axios
 
