@@ -1,6 +1,8 @@
 # vue + cordova
 
-![FF96UO](https://cdn.jsdelivr.net/gh/summer19940609/picture-repo@master/uPic/FF96UO.png)
+![m5A497](https://gitee.com/summer19940609/pic/raw/master/uPic/m5A497.jpg)
+
+![ovNzzD](https://gitee.com/summer19940609/pic/raw/master/uPic/ovNzzD.jpg)
 
 
 ## 步骤
