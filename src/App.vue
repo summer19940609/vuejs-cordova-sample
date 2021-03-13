@@ -52,8 +52,8 @@ export default {
     bottom: 50px;
 }
 .main-container {
-    height: 100vh;
+    /* height: 100vh;
     position: relative;
-    overflow: auto;
+    overflow: auto; */
 }
 </style>
