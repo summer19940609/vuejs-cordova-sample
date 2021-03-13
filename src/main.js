@@ -9,12 +9,16 @@ import axios from 'axios';
 import { Col, Row, PullRefresh, Divider, Skeleton, Toast } from 'vant';
 
 [
-    Col, Row, PullRefresh, Divider, Skeleton, Toast
+    Col,
+    Row,
+    PullRefresh,
+    Divider,
+    Skeleton,
+    Toast
 ].forEach(v => {
     Vue.use(v)
 })
 
-// Vue.use(Vant);
 Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
