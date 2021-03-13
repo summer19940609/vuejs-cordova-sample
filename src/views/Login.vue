@@ -1,12 +1,7 @@
 <template>
     <v-container class="login-container">
         <van-form @submit="onSubmit">
-            <van-field
-                v-model="username"
-                name="username"
-                label="用户名"
-                placeholder="用户名"
-            />
+            <van-field v-model="username" name="username" label="用户名" placeholder="用户名" />
             <van-field
                 v-model="password"
                 type="password"
@@ -15,7 +10,15 @@
                 placeholder="密码"
             />
             <div style="margin: 16px;">
-                <van-button round block type="info" native-type="submit">提交</van-button>
+                <van-button
+                    round
+                    block
+                    :loading="loading"
+                    :disabled="loading"
+                    type="info"
+                    loading-text="加载中..."
+                    native-type="submit"
+                >提交</van-button>
             </div>
         </van-form>
     </v-container>
@@ -28,6 +31,7 @@ export default {
         return {
             username: '',
             password: '',
+            loading: false
         };
     },
     mounted() {
@@ -35,12 +39,15 @@ export default {
     },
     methods: {
         async onSubmit({ username, password }) {
+            this.loading = true
             const { err, data } = await this.getX2rrFundsData(username, password)
             if (err) {
                 this.$toast.fail(err)
+                this.loading = false
                 return
             }
             this.$toast.success('同步成功')
+            this.loading = false
             this.$router.push('/fund')
         },
         getX2rrFundsData(username, password) {
