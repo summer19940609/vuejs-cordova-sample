@@ -147,6 +147,7 @@ export default {
                         resolve(fundList)
                     })
                     .catch((err) => {
+                        Toast.fail(err);
                         console.log('====> err的值为: ', err);
                         reject(err)
                     });
@@ -163,6 +164,7 @@ export default {
                     this.fundIndexList = fundIndexList;
                 })
                 .catch((err) => {
+                    Toast.fail(err);
                     console.log('====> err的值为: ', err);
                 });
         },
@@ -179,6 +181,7 @@ export default {
                     })
                     .catch((err) => {
                         console.log('====> err的值为: ', err);
+                        Toast.fail(err);
                         reject(err);
                     });
             });

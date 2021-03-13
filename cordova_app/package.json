@@ -36,8 +36,8 @@
             "cordova-plugin-compat": {}
         },
         "platforms": [
-            "ios",
-            "android"
+            "android",
+            "ios"
         ]
     },
     "devDependencies": {

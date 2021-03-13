@@ -6,10 +6,10 @@ import App from './App.vue';
 import router from './router/index';
 import i18n from './i18n';
 import axios from 'axios';
-import { Col, Row, PullRefresh, Divider, Skeleton, } from 'vant';
+import { Col, Row, PullRefresh, Divider, Skeleton, Toast } from 'vant';
 
 [
-    Col, Row, PullRefresh, Divider, Skeleton
+    Col, Row, PullRefresh, Divider, Skeleton, Toast
 ].forEach(v => {
     Vue.use(v)
 })
