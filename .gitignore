@@ -24,3 +24,4 @@ yarn-error.log*
 
 cordova_app/
 */www/
+cordova_app/www/index.html
