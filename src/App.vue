@@ -48,8 +48,8 @@ export default {
 <style scoped>
 .v-speed-dial {
     position: fixed;
-    right: 40px;
-    bottom: 50px;
+    right: 30px;
+    bottom: 30px;
 }
 .main-container {
     background-color: #f0f2f5;
