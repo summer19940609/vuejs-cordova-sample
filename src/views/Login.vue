@@ -85,7 +85,6 @@ export default {
 
 <style scoped>
 .login-container {
-    background-color: #f0f2f5;
     height: 100%;
     padding: 20px 0 0 0;
 }

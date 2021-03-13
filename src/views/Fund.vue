@@ -214,7 +214,7 @@ export default {
 }
 .fund-index-box {
     font-size: 16px;
-    background-color: #dde1ea;
+    background-color: #ffffff;
     padding: 10px;
     margin-top: 10px;
 }
@@ -222,8 +222,8 @@ export default {
     margin-top: 10px;
 }
 .fund-detail-item {
-    background-color: #e0e0e0;
-    border: 10px solid #e0e0e0;
+    background-color: #ffffff;
+    border: 10px solid #ffffff;
     padding: 10px;
     margin: 0 0 10px 0;
 }
@@ -257,7 +257,7 @@ export default {
 .fund-sum-box {
     height: 100px;
     font-size: 24px;
-    background-color: #e0e0e0;
+    background-color: #ffffff;
     margin-top: 10px;
     display: flex;
     align-content: center;

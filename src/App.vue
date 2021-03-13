@@ -51,4 +51,7 @@ export default {
     right: 40px;
     bottom: 50px;
 }
+.main-container {
+    background-color: #f0f2f5;
+}
 </style>
