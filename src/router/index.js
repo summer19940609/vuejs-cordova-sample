@@ -8,6 +8,7 @@ import Nfc from '@/views/Nfc'
 import Localisation from '@/views/Localisation'
 import Fund from '@/views/Fund'
 import Login from '@/views/Login'
+import V2ex from '@/views/V2ex'
 
 Vue.use(Router);
 
@@ -52,6 +53,12 @@ export default new Router({
             path: '/login',
             name: 'Login',
             component: Login
-        }
+        },
+        {
+            path: '/v2ex',
+            name: 'V2ex',
+            component: V2ex
+        },
+
     ]
 })

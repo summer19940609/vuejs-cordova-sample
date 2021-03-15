@@ -1,75 +1,103 @@
 <template>
-    <v-container text-center class="fund-container">
-        <van-pull-refresh
-            v-model="isLoading"
-            success-text="刷新成功"
-            @refresh="onRefresh"
-            class="refresh-box"
-        >
-            <van-skeleton row-width="[100%,100%,100%,100%]" animate :row="4" :loading="indexSkeletonLoading" style="margin-top: 20px;">
-                <div class="fund-index-box">
-                <van-row v-for="fundIndex in fundIndexList" :key="fundIndex.f12">
-                    <van-col span="6">{{ fundIndex.f14 }}</van-col>
-                    <van-col span="6">{{ fundIndex.f2 }}</van-col>
-                    <van-col
-                        span="6"
-                        :class="fundIndex.f4 > 0 ? 'text-red' : 'text-green'"
-                    >{{ fundIndex.f4 }}</van-col>
-                    <van-col
-                        span="6"
-                        :class="fundIndex.f3 > 0 ? 'text-red' : 'text-green'"
-                    >{{ fundIndex.f3 }}%</van-col>
-                </van-row>
-            </div>
-            </van-skeleton>
+  <v-container text-center class="fund-container">
+    <van-pull-refresh
+      v-model="isLoading"
+      success-text="刷新成功"
+      @refresh="onRefresh"
+      class="refresh-box"
+    >
+      <van-skeleton
+        row-width="[100%,100%,100%,100%]"
+        animate
+        :row="4"
+        :loading="indexSkeletonLoading"
+        style="margin-top: 20px;"
+      >
+        <div class="fund-index-box">
+          <van-row v-for="fundIndex in fundIndexList" :key="fundIndex.f12">
+            <van-col span="6">{{ fundIndex.f14 }}</van-col>
+            <van-col span="6">{{ fundIndex.f2 }}</van-col>
+            <van-col
+              span="6"
+              :class="fundIndex.f4 > 0 ? 'text-red' : 'text-green'"
+            >{{ fundIndex.f4 }}</van-col>
+            <van-col
+              span="6"
+              :class="fundIndex.f3 > 0 ? 'text-red' : 'text-green'"
+            >{{ fundIndex.f3 }}%</van-col>
+          </van-row>
+        </div>
+      </van-skeleton>
 
-            <van-skeleton class="fund-detail-sk" animate :row="9" :loading="skeletonLoading" style="margin-top: 20px;" v-if="hasSync">
-                <!-- 预计日收益 -->
-                <div class="fund-sum-box">
-                    <span>日收益</span>
-                    <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncome }}</span>
-                    <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}%</span>
-                </div>
-                <!-- 基金当日详情 -->
-                <div class="fund-detail-box">
-                    <div class="fund-detail-item" v-for="fund in fundList" :key="fund.code">
-                        <van-row>
-                            <van-col
-                                span="20"
-                                style="text-align: left;font-weight: 500;"
-                            >{{ fund.SHORTNAME }} {{ fund.code }}</van-col>
-                            <van-col span="4" style="text-align: right">{{ fund.GZTIME }}</van-col>
-                        </van-row>
-                        <van-row>
-                            <van-col span="8" class="fund-detail-fs">
-                                <span>份数/金额</span>
-                                <span>{{ fund.num }}</span>
-                                <span>{{ fund.CYJE }}</span>
-                            </van-col>
-                            <van-col span="8" class="fund-detail-cy">
-                                <!-- <span>持有收益</span> -->
-                                <span></span>
-                                <span></span>
-                            </van-col>
-                            <van-col span="8" class="fund-detail-gj">
-                                <span>估计收益</span>
-                                <span
-                                    :class="fund.GSZZL > 0 ? 'text-red' : 'text-green'"
-                                >{{ fund.GSZZL }}%</span>
-                                <span
-                                    :class="fund.GSZZL > 0 ? 'text-red' : 'text-green'"
-                                >{{ fund.GSSY }}</span>
-                            </van-col>
-                        </van-row>
-                    </div>
-                </div>
-                <van-divider>到底啦</van-divider>
-            </van-skeleton>
-            <van-empty description="还没有同步" v-if="!hasSync">
-                <van-button round type="danger" class="bottom-button" @click="jumpToSync">去同步</van-button>
-            </van-empty>
-        </van-pull-refresh>
-    </v-container>
+      <van-skeleton
+        class="fund-detail-sk"
+        animate
+        :row="9"
+        :loading="skeletonLoading"
+        style="margin-top: 20px;"
+        v-if="hasSync"
+      >
+        <!-- 预计日收益 -->
+        <div class="fund-sum-box">
+          <span>日收益</span>
+          <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncome }}</span>
+          <span :class="dayIncome > 0 ? 'text-red' : 'text-green'">{{ dayIncomePercent }}%</span>
+        </div>
+        <!-- 基金当日详情 -->
+        <div class="fund-detail-box">
+          <div class="fund-detail-item" v-for="fund in fundList" :key="fund.code">
+            <van-row>
+              <van-col
+                span="20"
+                style="text-align: left;font-weight: 500;"
+              >{{ fund.SHORTNAME }} {{ fund.code }}</van-col>
+              <van-col span="4" style="text-align: right">{{ fund.GZTIME }}</van-col>
+            </van-row>
+            <van-row>
+              <van-col span="8" class="fund-detail-fs">
+                <span>份数/金额</span>
+                <span>{{ fund.num }}</span>
+                <span>{{ fund.CYJE }}</span>
+              </van-col>
+              <van-col span="8" class="fund-detail-cy">
+                <!-- <span>持有收益</span> -->
+                <span></span>
+                <span></span>
+              </van-col>
+              <van-col span="8" class="fund-detail-gj">
+                <span>估计收益</span>
+                <span :class="fund.GSZZL > 0 ? 'text-red' : 'text-green'">{{ fund.GSZZL }}%</span>
+                <span :class="fund.GSZZL > 0 ? 'text-red' : 'text-green'">{{ fund.GSSY }}</span>
+              </van-col>
+            </van-row>
+          </div>
+        </div>
+        <van-divider>到底啦</van-divider>
+      </van-skeleton>
+      <van-empty description="还没有同步" v-if="!hasSync">
+        <van-button round type="danger" class="bottom-button" @click="jumpToSync">去同步</van-button>
+      </van-empty>
+    </van-pull-refresh>
+
+    <v-speed-dial
+      v-model="fab"
+      :top="top"
+      :bottom="bottom"
+      :right="right"
+      :left="left"
+      :direction="direction"
+      :open-on-hover="hover"
+      :transition="transition"
+    >
+      <template v-slot:activator>
+        <v-btn v-model="fab" color="blue darken-2" dark fab>
+          <v-icon v-if="fab">mdi-close</v-icon>
+          <v-icon v-else>mdi-wrench</v-icon>
+        </v-btn>
+      </template>
+      <v-btn fab dark big color="red" @click="jumpToSync">同步</v-btn>
+    </v-speed-dial>
+  </v-container>
 </template>
 
 <script>
@@ -206,11 +234,17 @@ export default {
 </script>
 
 <style scoped>
+.v-speed-dial {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
 .fund-container {
     height: 100%;
 }
 .refresh-box {
     -webkit-overflow-scrolling: touch;
+    height: 100%;
 }
 .fund-index-box {
     font-size: 16px;

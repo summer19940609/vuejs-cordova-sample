@@ -7,9 +7,9 @@
             :key="`item_${i}`"
             :to="item.action"
         >
-            <v-list-item-icon>
+            <!-- <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
+            </v-list-item-icon> -->
 
             <v-list-item-content>
                 <v-list-item-title v-text="item.text"></v-list-item-title>
@@ -25,7 +25,8 @@ export default {
     data: function () {
         return {
             items: [
-                { icon: 'home', text: this.$t('drawer.fund'), action: 'fund' },
+                { icon: 'home', text: '基金', action: 'fund' },
+                { icon: 'home', text: 'v2ex热帖', action: 'v2ex' },
                 // { icon: 'vibration', text: this.$t('drawer.vibration'), action: 'vibration' },
                 // { icon: 'camera', text: this.$t('drawer.camera'), action: 'camera' },
                 // { icon: 'flash_on', text: this.$t('drawer.flash'), action: 'flash' },
