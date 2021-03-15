@@ -264,7 +264,7 @@ export default {
     justify-content: center;
 }
 .fund-sum-box span {
-    margin: 0 20px;
+    margin: 0 10px;
     display: inline-block;
     line-height: 100px;
     height: 100px;

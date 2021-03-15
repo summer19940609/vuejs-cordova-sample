@@ -53,5 +53,6 @@ export default {
 }
 .main-container {
     background-color: #f0f2f5;
+    height: 100%;
 }
 </style>
