@@ -8,9 +8,8 @@
           :key="item.id"
           :value="`${index+1}.${item.title}`"
           is-link
-          :url="item.url"
           class="cell-text"
-          @click="window.open(item.url, '_self', { zoom: 'no'})"
+          @click="jump2V2ex(item.url)"
         />
         <van-divider>到底了</van-divider>
       </van-skeleton>
@@ -54,6 +53,9 @@ export default {
                     console.log('====> err的值为: ', err);
                 });
         },
+        jump2V2ex(url) {
+            window.open(url, '_blank', 'location=yes');
+        }
     },
 };
 </script>
