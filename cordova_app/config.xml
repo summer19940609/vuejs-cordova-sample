@@ -9,6 +9,7 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <allow-navigation href="http://*/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -30,6 +31,7 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#313AA5" />
     <preference name="HeaderColor" value="#313AA5" />
+    <preference name="InAppBrowserStatusBarStyle" value="lightcontent" />
     <plugin name="cordova-plugin-android-window-background" spec="^1.0.1">
         <variable name="WINDOW_BACKGROUND_COLOR" value="#ffffff" />
     </plugin>
