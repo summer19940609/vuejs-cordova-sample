@@ -63,7 +63,7 @@ export default new Router({
             component: V2ex
         },
         {
-            path: '/topics/:d',
+            path: '/topics/:fid',
             name: 'topics',
             component: Topics
         },
