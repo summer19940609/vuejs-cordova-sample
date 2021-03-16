@@ -3,7 +3,7 @@
         <myToolbar />
         <v-content>
             <v-slide-y-transition mode="out-in">
-                <v-container pa-0 fluid fill-height align-content-center align-center class="main-container">
+                <v-container class="main-container">
                     <router-view></router-view>
                 </v-container>
             </v-slide-y-transition>
@@ -16,9 +16,6 @@ import myToolbar from '@/components/MyToolbar';
 export default {
     name: 'app',
     components: { myToolbar },
-    methods: {
-
-    }
 };
 </script>
 
@@ -26,5 +23,6 @@ export default {
 .main-container {
     background-color: #f0f2f5;
     height: 100%;
+    padding: 0;
 }
 </style>

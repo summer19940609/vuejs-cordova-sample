@@ -9,6 +9,9 @@ import Localisation from '@/views/Localisation'
 import Fund from '@/views/Fund'
 import Login from '@/views/Login'
 import V2ex from '@/views/V2ex'
+import Topics from '@/views/topics';
+import Details from '@/views/details';
+import HomeNga from '@/views/home_nga';
 
 Vue.use(Router);
 
@@ -58,6 +61,21 @@ export default new Router({
             path: '/v2ex',
             name: 'V2ex',
             component: V2ex
+        },
+        {
+            path: '/topics/:d',
+            name: 'topics',
+            component: Topics
+        },
+        {
+            path: '/details/:tid',
+            name: 'details',
+            component: Details
+        },
+        {
+            path: '/home_nga',
+            name: 'home_nga',
+            component: HomeNga
         },
 
     ]
