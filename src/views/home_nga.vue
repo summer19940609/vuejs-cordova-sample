@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="home">
     <van-tabs v-model="active" :value="activeTab">
       <van-tab title="游戏综合" value="tab2">
@@ -8,10 +8,10 @@
         <home-list title="网游" :topics="topics.games_online"></home-list>
         <home-list title="手游" :topics="topics.games_mobile"></home-list>
       </van-tab>
-      <van-tab title="游戏综合" value="tab3">
+      <van-tab title="玩家生活" value="tab3">
         <home-list title="杂谈" :topics="topics.water"></home-list>
       </van-tab>
-      <van-tab title="游戏综合" value="tab4">
+      <van-tab title="魔兽世界" value="tab4">
         <home-list title="CCQ" :topics="topics.wow"></home-list>
       </van-tab>
     </van-tabs>

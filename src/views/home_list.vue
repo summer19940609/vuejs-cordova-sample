@@ -24,7 +24,7 @@ export default {
     props: ['title', 'topics'],
     methods: {
         open(item) {
-          console.log(item);
+            console.log('====> item的值为: ', item);
             localStorage.setItem('curr_t', item.topic);
             localStorage.setItem('curr_t_info', JSON.stringify(item));
             this.$store.commit('MT_TOPIC_MOD_REFRESHING', true);
@@ -37,20 +37,20 @@ export default {
 
 <style lang="css">
 .m_icons {
-  height: 50px;
-  width: 50px;
-  margin-left: 3px;
+    height: 50px;
+    width: 50px;
+    margin-left: 3px;
 }
 
 .d_menus {
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  padding: 8px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 8px;
 }
 
 .c_menus {
-  width: 33%;
-  padding: 8px;
+    width: 33%;
+    padding: 8px;
 }
 </style>

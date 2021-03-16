@@ -10,8 +10,8 @@ Vue.use(VueResource);
 // 创建一个对象来保存应用启动时的初始状态
 const store = new Vuex.Store({
     state: {
-        baseurl: 'http://127.0.0.1:8088/nga',
-        baseurl_pic: 'http://127.0.0.1:8088/nga/pic?url=',
+        baseurl: 'https://bbs.nga.cn',
+        baseurl_pic: 'https://bbs.nga.cn/pic?url=',
         // baseurl: '../nga/nga',
         // baseurl_pic: '../nga/nga/pic?url=',
         topic_list: [],
@@ -98,17 +98,18 @@ const store = new Vuex.Store({
     },
     actions: {
         [types.AC_TOPIC_GET_LIST]({ commit, state }, para) {
-            console.log('enter AC_TOPIC_GET_LIST');
+            console.log('====> para的值为: ', para);
             state.topic_loading = true;
             if (state.topic_list.length === 0 || para.page > 1 || state.topic_refreshing) {
                 Vue.http({
-                    url: state.baseurl + '/thread',
+                    url: state.baseurl + '/thread.php',
                     method: 'GET',
                     params: {
                         fid: para.fid,
                         page: para.page
                     }
                 }).then(res => {
+                    console.log('====> res的值为: ', res);
                     var last_topics = state.topic_list
                     if (para.page === 1) {
                         commit(types.MT_TOPIC_CLEAR_LIST);
