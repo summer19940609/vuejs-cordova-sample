@@ -22,4 +22,10 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script>
+    document.addEventListener('deviceready', onDeviceReady, false);
+    function onDeviceReady() {
+      window.open = cordova.InAppBrowser.open;
+    }
+  </script>
 </html>
