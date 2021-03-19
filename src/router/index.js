@@ -12,6 +12,7 @@ import V2ex from '@/views/V2ex'
 import Topics from '@/views/topics';
 import Details from '@/views/details';
 import HomeNga from '@/views/home_nga';
+import NgaLogin from '@/views/nga_login';
 
 Vue.use(Router);
 
@@ -76,6 +77,11 @@ export default new Router({
             path: '/home_nga',
             name: 'home_nga',
             component: HomeNga
+        },
+        {
+            path: '/nga_login',
+            name: 'nga_login',
+            component: NgaLogin
         },
 
     ]

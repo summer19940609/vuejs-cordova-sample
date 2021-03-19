@@ -28,6 +28,7 @@ export default {
                 { icon: 'home', text: '基金', action: 'fund' },
                 { icon: 'home', text: 'v2ex热帖', action: 'v2ex' },
                 { icon: 'home', text: 'nga', action: 'home_nga' },
+                { icon: 'home', text: 'nga登录', action: 'nga_login' },
                 // { icon: 'vibration', text: this.$t('drawer.vibration'), action: 'vibration' },
                 // { icon: 'camera', text: this.$t('drawer.camera'), action: 'camera' },
                 // { icon: 'flash_on', text: this.$t('drawer.flash'), action: 'flash' },
