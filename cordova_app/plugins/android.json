@@ -26,6 +26,9 @@
     "cordova-plugin-headercolor": {
       "PACKAGE_NAME": "vuejs.cordova.sample"
     },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "vuejs.cordova.sample"
     },
@@ -36,9 +39,6 @@
       "PACKAGE_NAME": "vuejs.cordova.sample"
     },
     "phonegap-nfc": {
-      "PACKAGE_NAME": "vuejs.cordova.sample"
-    },
-    "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "vuejs.cordova.sample"
     }
   },
