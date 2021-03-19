@@ -37,7 +37,7 @@
     <plugin name="phonegap-nfc" spec="^0.6.6" />
     <plugin name="cordova-plugin-vibration" spec="^2.1.6" />
 
-    <access origin="*" />
+    <access origin="*" subdomains="true" />
     <allow-navigation href="*" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
