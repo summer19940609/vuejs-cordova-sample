@@ -21,7 +21,7 @@ Vue.use(Vant);
 Vue.use(MuseUI);
 Vue.use(VueResource);
 
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false

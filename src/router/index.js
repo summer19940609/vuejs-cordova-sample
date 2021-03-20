@@ -13,7 +13,7 @@ import Topics from '@/views/topics';
 import Details from '@/views/details';
 import HomeNga from '@/views/home_nga';
 import NgaLogin from '@/views/nga_login';
-
+import NgaTopic from '@/views/nga_topic'
 Vue.use(Router);
 
 export default new Router({
@@ -83,6 +83,10 @@ export default new Router({
             name: 'nga_login',
             component: NgaLogin
         },
-
+        {
+            path: '/nga_topic',
+            name: 'nga_topic',
+            component: NgaTopic
+        },
     ]
 })
