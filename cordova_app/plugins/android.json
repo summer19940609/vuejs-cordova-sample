@@ -7,6 +7,9 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-advanced-http": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
     "cordova-plugin-android-window-background": {
       "WINDOW_BACKGROUND_COLOR": "#ffffff",
       "PACKAGE_NAME": "vuejs.cordova.sample"
@@ -38,9 +41,19 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "vuejs.cordova.sample"
     },
+    "cordova-plugin-wkwebviewxhrfix": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
     "phonegap-nfc": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "@globules-io/cordova-plugin-ios-xhr": {
       "PACKAGE_NAME": "vuejs.cordova.sample"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    }
+  }
 }
