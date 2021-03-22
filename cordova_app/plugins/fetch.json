@@ -100,7 +100,7 @@
   "cordova-plugin-wkwebviewxhrfix": {
     "source": {
       "type": "registry",
-      "id": "https://github.com/TheMattRay/cordova-plugin-wkwebviewxhrfix"
+      "id": "github:TheMattRay/cordova-plugin-wkwebviewxhrfix"
     },
     "is_top_level": true,
     "variables": {}
@@ -108,7 +108,7 @@
   "@globules-io/cordova-plugin-ios-xhr": {
     "source": {
       "type": "registry",
-      "id": "https://github.com/globules-io/cordova-plugin-ios-xhr"
+      "id": "github:globules-io/cordova-plugin-ios-xhr"
     },
     "is_top_level": true,
     "variables": {}
@@ -116,7 +116,7 @@
   "cordova-plugin-advanced-http": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-advanced-http"
+      "id": "cordova-plugin-advanced-http@^3.1.0"
     },
     "is_top_level": true,
     "variables": {}
