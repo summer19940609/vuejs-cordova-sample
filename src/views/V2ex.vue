@@ -53,14 +53,13 @@ export default {
             //         console.log('====> err的值为: ', err);
             //     });
             cordova.plugin.http.setDataSerializer('json');
-            window.cordova.plugin.http.get('https://api.mrcuriosity.org/sites/v2ex/items', {}, {}
-                , res => {
+            window.cordova.plugin.http.get('https://api.mrcuriosity.org/sites/v2ex/items', {}, {},
+                res => {
                     if (res.status !== 200) {
                         console.log('获取数据失败');
-                        this.$toast.fail('error');
-                        return;
+                        this.$toast.fail('获取数据失败');
                     }
-                    this.$toast.success('获取成功')
+                    this.$toast.success('获取数据成功')
                     this.list = JSON.parse(res.data);
                     this.isLoading = false
                 }, err => {
