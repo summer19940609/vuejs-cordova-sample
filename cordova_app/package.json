@@ -34,7 +34,10 @@
                 "WINDOW_BACKGROUND_COLOR": "#ffffff"
             },
             "cordova-plugin-compat": {},
-            "cordova-plugin-inappbrowser": {}
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-wkwebviewxhrfix": {},
+            "@globules-io/cordova-plugin-ios-xhr": {},
+            "cordova-plugin-advanced-http": {}
         },
         "platforms": [
             "ios",
@@ -42,9 +45,13 @@
         ]
     },
     "devDependencies": {
+        "@globules-io/cordova-plugin-ios-xhr": "github:globules-io/cordova-plugin-ios-xhr",
         "cordova-android": "^9.0.0",
         "cordova-ios": "^6.2.0",
+        "cordova-plugin-advanced-http": "^3.1.0",
         "cordova-plugin-compat": "^1.2.0",
-        "cordova-plugin-inappbrowser": "^5.0.0"
+        "cordova-plugin-file": "^6.0.2",
+        "cordova-plugin-inappbrowser": "^5.0.0",
+        "cordova-plugin-wkwebviewxhrfix": "github:TheMattRay/cordova-plugin-wkwebviewxhrfix"
     }
 }

@@ -26,6 +26,8 @@ Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
 
+Vue.cordova = Vue.prototype.$cordova = window.cordova
+
 const init = () => {
     new Vue({
         vuetify,
