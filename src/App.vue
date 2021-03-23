@@ -2,6 +2,7 @@
     <v-app toolbar>
         <myToolbar />
         <v-content>
+            <Loading v-show="LOADING"></Loading>
             <v-slide-y-transition mode="out-in">
                 <v-container class="main-container">
                     <router-view></router-view>
@@ -13,9 +14,14 @@
 
 <script>
 import myToolbar from '@/components/MyToolbar';
+import { mapState } from 'vuex'
+import Loading from '@/components/Loading'
 export default {
     name: 'app',
-    components: { myToolbar },
+    computed: {
+        ...mapState(['LOADING'])
+    },
+    components: { myToolbar, Loading },
 };
 </script>
 

@@ -1,10 +1,8 @@
 <template>
     <v-container text-center>
         <div class="home">
-            <h4>{{ $t('title') }}</h4>
-            <v-btn @click="openMenu" class="mt-10">{{
-                $t('showSample')
-            }}</v-btn>
+            <h4>主页</h4>
+            <v-btn @click="openMenu" class="mt-10">打开侧边栏</v-btn>
         </div>
     </v-container>
 </template>
@@ -23,5 +21,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

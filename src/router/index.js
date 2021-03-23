@@ -1,19 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
-import Vibration from '@/views/Vibration'
-import Flash from '@/views/Flash'
 import Camera from '@/views/Camera'
-import Nfc from '@/views/Nfc'
-import Localisation from '@/views/Localisation'
 import Fund from '@/views/Fund'
 import Login from '@/views/Login'
 import V2ex from '@/views/V2ex'
-import Topics from '@/views/topics';
-import Details from '@/views/details';
-import HomeNga from '@/views/home_nga';
-import NgaLogin from '@/views/nga_login';
-import NgaTopic from '@/views/nga_topic'
+import Nga from '@/views/Nga';
 Vue.use(Router);
 
 export default new Router({
@@ -24,29 +16,9 @@ export default new Router({
             component: Home
         },
         {
-            path: '/vibration',
-            name: 'Vibration',
-            component: Vibration
-        },
-        {
-            path: '/flash',
-            name: 'Flash',
-            component: Flash
-        },
-        {
             path: '/camera',
             name: 'Camera',
             component: Camera
-        },
-        {
-            path: '/nfc',
-            name: 'Nfc',
-            component: Nfc
-        },
-        {
-            path: '/localisation',
-            name: 'Localisation',
-            component: Localisation
         },
         {
             path: '/fund',
@@ -64,29 +36,9 @@ export default new Router({
             component: V2ex
         },
         {
-            path: '/topics/:fid',
-            name: 'topics',
-            component: Topics
-        },
-        {
-            path: '/details/:tid',
-            name: 'details',
-            component: Details
-        },
-        {
-            path: '/home_nga',
-            name: 'home_nga',
-            component: HomeNga
-        },
-        {
-            path: '/nga_login',
-            name: 'nga_login',
-            component: NgaLogin
-        },
-        {
-            path: '/nga_topic',
-            name: 'nga_topic',
-            component: NgaTopic
-        },
+            path: '/nga',
+            name: 'Nga',
+            component: Nga
+        }
     ]
 })

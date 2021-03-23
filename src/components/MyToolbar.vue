@@ -5,13 +5,8 @@
         </v-navigation-drawer>
 
         <v-app-bar class="indigo" clipped-left app>
-            <v-app-bar-nav-icon
-                dark
-                @click.stop="drawer = !drawer"
-            ></v-app-bar-nav-icon>
-            <v-toolbar-title @click="goHome" class="white--text">{{
-                $t('title')
-            }}</v-toolbar-title>
+            <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-toolbar-title @click="goHome" class="white--text">cordova+vue</v-toolbar-title>
         </v-app-bar>
     </div>
 </template>
@@ -28,11 +23,9 @@ export default {
         };
     },
     mounted: function () {
-        // Listen for event openDrawer (triggered by other component, like the button in the home)
         document.addEventListener('toggleDrawer', this.toggleDrawer);
     },
     beforeDestroy: function () {
-        // If the component is unmount, unlisten the event.
         document.removeEventListener('toggleDrawer', this.toggleDrawer);
     },
     methods: {

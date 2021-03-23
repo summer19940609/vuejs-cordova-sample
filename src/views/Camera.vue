@@ -3,7 +3,7 @@
 <template>
     <v-container text-center>
         <img v-if="imagePath !== ''" :src="imagePath" />
-        <v-btn @click="takePicture">{{ $t('takePhoto') }}</v-btn>
+        <v-btn @click="takePicture">拍照</v-btn>
     </v-container>
 </template>
 <script>
@@ -17,7 +17,6 @@ export default {
         };
     },
     methods: {
-        // Use the camera plugin to capture image
         takePicture() {
             if (navigator.camera) {
                 navigator.camera.getPicture(this.setPicture, this.error, {});
@@ -32,7 +31,7 @@ export default {
             this.imagePath = imagePath;
         },
         error() {
-            nativeAlert(this.$t('error'));
+            nativeAlert('发生错误');
         },
     },
 };
