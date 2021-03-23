@@ -7,8 +7,8 @@
             </div>
         </van-form>-->
 
-        <van-pull-refresh v-model="refreshing" success-text="刷新成功">
-            <van-list id='topic-list' v-model="loading" :finished="finished" @load="onLoad" offset="100">
+        <van-pull-refresh id='topic-list' v-model="refreshing" success-text="刷新成功">
+            <van-list v-model="loading" :finished="finished" @load="onLoad" offset="100">
                 <div class="topic-item" v-for="( item ) in list" :key="item.tid" @click="go2detail(item.tpcurl)">
                     <div class="topic-title">{{`${item.subject}`}}</div>
                     <div class="img-group" v-if="item.img">
@@ -66,6 +66,7 @@ export default {
             this.$store.commit('showLoading')
             const { list, total, err } = await this.getNgaTopic(fid, String(page))
             if (err) {
+                this.$store.commit('hideLoading')
                 return err
             }
             if (!list.length) {

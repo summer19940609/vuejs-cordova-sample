@@ -1,16 +1,8 @@
 <template>
     <v-container>
-        <van-pull-refresh v-model="isRefreshing" @refresh="onRefresh" success-text="刷新成功">
-            <van-skeleton :row="3" :loading="isLoading">
-                <van-cell
-                    v-show="!isLoading"
-                    v-for="(item,index) in list"
-                    :key="item.id"
-                    :value="`${index+1}.${item.title}`"
-                    is-link
-                    class="cell-text"
-                    @click="jump2V2ex(item.url)"
-                />
+        <van-pull-refresh id='v2ex-list' v-model="isRefreshing" @refresh="onRefresh" success-text="刷新成功">
+            <van-skeleton :row="3" :loading="isLoading" row-width="[100%,100%,100%]">
+                <van-cell v-show="!isLoading" v-for="(item,index) in list" :key="item.id" :value="`${index+1}.${item.title}`" is-link class="cell-text" @click="jump2V2ex(item.url)" />
                 <van-divider>到底了</van-divider>
             </van-skeleton>
         </van-pull-refresh>
@@ -18,26 +10,32 @@
 </template>
 
 <script>
+import BetterScroll from 'better-scroll'
+let bs = new BetterScroll('#v2ex-list', {
+    movable: true,
+    zoom: true
+})
+
 export default {
     data() {
         return {
             list: [],
             isRefreshing: false,
             isLoading: true
-        };
+        }
     },
     created() {
         this.$store.commit('setTitle', 'V2EX')
     },
     mounted() {
-        this.getV2exHot();
+        this.getV2exHot()
     },
     methods: {
         onRefresh() {
-            this.getV2exHot();
+            this.getV2exHot()
             setTimeout(() => {
-                this.isRefreshing = false;
-            }, 1000);
+                this.isRefreshing = false
+            }, 1000)
         },
         getV2exHot() {
             // this.$axios
@@ -55,26 +53,31 @@ export default {
             //         this.$toast.fail(err);
             //         console.log('====> err的值为: ', err);
             //     });
-            cordova.plugin.http.setDataSerializer('json');
-            window.cordova.plugin.http.get('https://api.mrcuriosity.org/sites/v2ex/items', {}, {},
+            cordova.plugin.http.setDataSerializer('json')
+            window.cordova.plugin.http.get(
+                'https://api.mrcuriosity.org/sites/v2ex/items',
+                {},
+                {},
                 res => {
                     if (res.status !== 200) {
-                        console.log('获取数据失败');
-                        this.$toast.fail('获取数据失败');
+                        console.log('获取数据失败')
+                        this.$toast.fail('获取数据失败')
                     }
                     this.$toast.success('获取数据成功')
-                    this.list = JSON.parse(res.data);
+                    this.list = JSON.parse(res.data)
                     this.isLoading = false
-                }, err => {
-                    console.log(JSON.stringify(err));
-                    this.$toast.fail(err);
-                });
+                },
+                err => {
+                    console.log(JSON.stringify(err))
+                    this.$toast.fail(err)
+                }
+            )
         },
         jump2V2ex(url) {
-            window.open(url, '_blank', 'location=yes');
+            window.open(url, '_blank', 'zoom=no')
         }
-    },
-};
+    }
+}
 </script>
 
 <style scoped>
