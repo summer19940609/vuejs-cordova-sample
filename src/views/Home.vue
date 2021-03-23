@@ -10,6 +10,9 @@
 <script>
 export default {
     name: 'home',
+    created() {
+        this.$store.commit('setTitle', '主页')
+    },
     methods: {
         openMenu: () => {
             // When user tap the button dispatch an event into the dom.

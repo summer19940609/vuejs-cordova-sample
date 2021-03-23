@@ -34,6 +34,9 @@ export default {
             loading: false
         };
     },
+    created() {
+        this.$store.commit('setTitle', '基金同步')
+    },
     mounted() {
 
     },

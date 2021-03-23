@@ -7,7 +7,8 @@ Vue.use(Vuex);
 // 创建一个对象来保存应用启动时的初始状态
 const store = new Vuex.Store({
     state: {
-        LOADING: false
+        LOADING: false,
+        TITLE: 'cordova+vue'
     },
     getters: {
 
@@ -18,6 +19,9 @@ const store = new Vuex.Store({
         },
         hideLoading(state) {
             state.LOADING = false
+        },
+        setTitle(state, title) {
+            state.TITLE = title
         }
     },
     actions: {

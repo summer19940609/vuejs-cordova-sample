@@ -26,6 +26,9 @@ export default {
             isLoading: true
         };
     },
+    created() {
+        this.$store.commit('setTitle', 'V2EX')
+    },
     mounted() {
         this.getV2exHot();
     },

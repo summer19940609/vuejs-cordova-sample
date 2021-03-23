@@ -114,6 +114,9 @@ export default {
             hasSync: false
         };
     },
+    created() {
+        this.$store.commit('setTitle', '基金')
+    },
     mounted() {
         this.getFundIndexData();
         this.initData();

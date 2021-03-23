@@ -8,7 +8,7 @@
         </van-form>-->
 
         <van-pull-refresh v-model="refreshing" success-text="刷新成功">
-            <van-list v-model="loading" :finished="finished" @load="onLoad" offset="100">
+            <van-list id='topic-list' v-model="loading" :finished="finished" @load="onLoad" offset="100">
                 <div class="topic-item" v-for="( item ) in list" :key="item.tid" @click="go2detail(item.tpcurl)">
                     <div class="topic-title">{{`${item.subject}`}}</div>
                     <div class="img-group" v-if="item.img">
@@ -25,6 +25,12 @@
 </template>
 
 <script>
+import BetterScroll from 'better-scroll'
+let bs = new BetterScroll('#topic-list', {
+    movable: true,
+    zoom: true
+})
+
 export default {
     name: 'nga',
     data() {
@@ -43,7 +49,9 @@ export default {
                 'bbsmisccookies=%7B%22pv_count_for_insad%22%3A%7B0%3A-44%2C1%3A1616432476%7D%2C%22insad_views%22%3A%7B0%3A1%2C1%3A1616432476%7D%2C%22uisetting%22%3A%7B0%3A%22b%22%2C1%3A1616424785%7D%7D; lastpath=/thread.php?fid=706&rand=348; lastvisit=1616424485; ngaPassportCid=X94a566bs5dp95io9r4mmotk703fsbtv52nfdsma; ngaPassportUid=62671744; ngaPassportUrlencodedUname=verygoodbye; ngacn0comInfoCheckTime=1616424482; ngacn0comUserInfo=verygoodbye%09verygoodbye%0939%0939%09%0910%090%094%090%090%09; ngacn0comUserInfoCheck=a79af1523ef7db96cdff7873b19e2afa; ngaPassportOid=a33135eb553e3d68deddf326a01788eb; guestJs=1616424469; taihe_bi_sdk_session=8dd0ecb6ecded9d78a753bdc2a330f70; taihe_bi_sdk_uid=e35bdc61c6574f31e0d47e33cb1dccd0'
         }
     },
-    created() {},
+    created() {
+        this.$store.commit('setTitle', '大时代')
+    },
     async mounted() {
         const { list, total, err } = await this.handelTopic(this.fid, '1')
         if (err) {
@@ -84,7 +92,7 @@ export default {
                     page: page,
                     __output: '11'
                 }
-                console.log(`==== params => ${JSON.stringify(params)}`);
+                console.log(`==== params => ${JSON.stringify(params)}`)
                 const header = {
                     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
                     Host: 'bbs.nga.cn',
@@ -119,7 +127,7 @@ export default {
                         // 接口结构变化特殊处理
                         if (Array.isArray(_T)) {
                             list = _T
-                        } else if (Object.prototype.toString.call(_T) === "[object Object]") {
+                        } else if (Object.prototype.toString.call(_T) === '[object Object]') {
                             list = Object.values(_T)
                         }
 
