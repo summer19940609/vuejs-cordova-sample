@@ -9,21 +9,10 @@
 
         <van-pull-refresh v-model="refreshing" success-text="刷新成功">
             <van-list v-model="loading" :finished="finished" @load="onLoad" offset="100">
-                <div
-                    class="topic-item"
-                    v-for="( item ) in list"
-                    :key="item.tid"
-                    @click="go2detail(item.tpcurl)"
-                >
+                <div class="topic-item" v-for="( item ) in list" :key="item.tid" @click="go2detail(item.tpcurl)">
                     <div class="topic-title">{{`${item.subject}`}}</div>
                     <div class="img-group" v-if="item.img">
-                        <img
-                            class="topic-img"
-                            :src="`https://img.nga.178.com/attachments/${pic}`"
-                            alt
-                            v-for="pic in item.img"
-                            :key="pic"
-                        />
+                        <img class="topic-img" :src="`https://img.nga.178.com/attachments/${pic}`" alt v-for="pic in item.img" :key="pic" />
                     </div>
                     <van-row class="topic-author-reply">
                         <van-col class="topic-author" span="20">{{ item.author }}</van-col>
@@ -36,7 +25,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'nga',
     data() {
@@ -55,9 +43,7 @@ export default {
                 'bbsmisccookies=%7B%22pv_count_for_insad%22%3A%7B0%3A-44%2C1%3A1616432476%7D%2C%22insad_views%22%3A%7B0%3A1%2C1%3A1616432476%7D%2C%22uisetting%22%3A%7B0%3A%22b%22%2C1%3A1616424785%7D%7D; lastpath=/thread.php?fid=706&rand=348; lastvisit=1616424485; ngaPassportCid=X94a566bs5dp95io9r4mmotk703fsbtv52nfdsma; ngaPassportUid=62671744; ngaPassportUrlencodedUname=verygoodbye; ngacn0comInfoCheckTime=1616424482; ngacn0comUserInfo=verygoodbye%09verygoodbye%0939%0939%09%0910%090%094%090%090%09; ngacn0comUserInfoCheck=a79af1523ef7db96cdff7873b19e2afa; ngaPassportOid=a33135eb553e3d68deddf326a01788eb; guestJs=1616424469; taihe_bi_sdk_session=8dd0ecb6ecded9d78a753bdc2a330f70; taihe_bi_sdk_uid=e35bdc61c6574f31e0d47e33cb1dccd0'
         }
     },
-    created() {
-
-    },
+    created() {},
     async mounted() {
         const { list, total, err } = await this.handelTopic(this.fid, '1')
         if (err) {
@@ -66,13 +52,11 @@ export default {
         this.list = list
         this.total = total
         this.pageMax = Math.ceil(total / this.defaultPageSize)
-        console.log(`====> pageMax=${this.pageMax}`);
     },
     methods: {
-
         async handelTopic(fid, page) {
             this.$store.commit('showLoading')
-            const { list, total, err } = await this.getNgaTopic(fid, page)
+            const { list, total, err } = await this.getNgaTopic(fid, String(page))
             if (err) {
                 return err
             }
@@ -84,7 +68,7 @@ export default {
                 if (err) {
                     // console.log(`====> err为: ${JSON.stringify(err)}`)
                 }
-                v['__T'] = data.__T                     // 主题详情
+                v['__T'] = data.__T // 主题详情
                 const attachs = data.__T.post_misc_var.attachs
                 if (attachs && Array.isArray(attachs)) {
                     v['img'] = attachs.map(k => k.attachurl)
@@ -100,6 +84,7 @@ export default {
                     page: page,
                     __output: '11'
                 }
+                console.log(`==== params => ${JSON.stringify(params)}`);
                 const header = {
                     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
                     Host: 'bbs.nga.cn',
@@ -111,7 +96,6 @@ export default {
                     Cookie: this.nga_cookie
                 }
 
-                console.log(`====> [thread.php]中params为: ${JSON.stringify(params)}`)
                 const options = {
                     method: 'post',
                     data: params,
@@ -124,22 +108,21 @@ export default {
                     `https://bbs.nga.cn/thread.php`,
                     options,
                     res => {
-                        console.log(`====> [thread.php]的res为: ${JSON.stringify(res)}`)
                         if (res.status !== 200) {
                             this.$toast.fail('error')
                             reject({ list: null, total: null, err: 'error' })
                         }
                         let data = res.data
-                        this.hasData = true
 
                         const _T = data.data.__T
                         let list = []
                         // 接口结构变化特殊处理
                         if (Array.isArray(_T)) {
                             list = _T
-                        } else if (Object.prototype.toString.call(obj) === '[Object Object]') {
+                        } else if (Object.prototype.toString.call(_T) === "[object Object]") {
                             list = Object.values(_T)
                         }
+
                         resolve({ list: list, total: data.data.__ROWS, err: null })
                     },
                     err => {
@@ -169,7 +152,6 @@ export default {
                     Cookie: this.nga_cookie
                 }
 
-                console.log(`====> [read.php]的params为: ${JSON.stringify(params)}`)
                 const options = {
                     method: 'post',
                     data: params,
@@ -182,7 +164,6 @@ export default {
                     `https://bbs.nga.cn/read.php`,
                     options,
                     res => {
-                        console.log(`====> [read.php]的res为: ${JSON.stringify(res)}`)
                         if (res.status !== 200) {
                             this.$toast.fail('error')
                             reject({ data: null, err: 'error' })
@@ -198,36 +179,32 @@ export default {
                 )
             })
         },
-        async loadMore(page) {
-            if (page > this.pageMax) {
-                this.finished = true
-                return
-            }
-            const { list, total, err } = await this.getNgaTopic(this.fid, String(page))
-            if (err) {
-                return err
-            }
-            this.list = list
-            this.total = total
-            this.pageMax = Math.ceil(total / this.defaultPageSize)
-        },
         onRefresh() {
             // 清空列表数据
             this.finished = false
+
+            // 重新加载数据
             // 将 loading 设置为 true，表示处于加载状态
             this.loading = true
             this.onLoad()
         },
-        onLoad() {
+        async onLoad() {
             if (this.refreshing) {
                 this.list = []
                 this.refreshing = false
             }
-            this.loadMore(this.page + 1)
+            const { list, total, err } = await this.handelTopic(this.fid, this.page + 1)
+            if (err) {
+                return
+            }
+            this.list = list
+            this.total = total
+            this.pageMax = Math.ceil(total / this.defaultPageSize)
+
             this.loading = false
         },
         go2detail(url) {
-            window.open(`https://bbs.nga.cn${url}`, '_blank', 'location=yes');
+            window.open(`https://bbs.nga.cn${url}`, '_blank', 'location=yes')
         }
     }
 }
