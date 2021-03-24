@@ -1,9 +1,0 @@
-{
-    "ImageIO.framework": 1,
-    "CoreLocation.framework": 2,
-    "AVFoundation.framework": 1,
-    "AudioToolbox.framework": 2,
-    "WebKit.framework": 1,
-    "Security.framework": 1,
-    "SystemConfiguration.framework": 1
-}
