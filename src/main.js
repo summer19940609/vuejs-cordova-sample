@@ -4,15 +4,13 @@ import vuetify from './plugins/vuetify';
 import App from './App.vue';
 import router from './router/index';
 import axios from 'axios';
-import Vant from 'vant';
 import store from './vuex/store';
-import 'vant/lib/index.css';
-
-Vue.use(Vant);
+import vantCompoents from '@/libs/vant.config'
 
 // axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
+Vue.use(vantCompoents)
 
 const init = () => {
     new Vue({
