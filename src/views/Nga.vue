@@ -7,7 +7,7 @@
             </div>
         </van-form>-->
 
-        <van-pull-refresh id='topic-list' v-model="refreshing" success-text="刷新成功">
+        <van-pull-refresh v-model="refreshing" success-text="刷新成功">
             <van-list v-model="loading" :finished="finished" @load="onLoad" offset="100">
                 <div class="topic-item" v-for="( item ) in list" :key="item.tid" @click="go2detail(item.tpcurl)">
                     <div class="topic-title">{{`${item.subject}`}}</div>
@@ -25,11 +25,6 @@
 </template>
 
 <script>
-import BetterScroll from 'better-scroll'
-let bs = new BetterScroll('#topic-list', {
-    movable: true,
-    zoom: true
-})
 
 export default {
     name: 'nga',

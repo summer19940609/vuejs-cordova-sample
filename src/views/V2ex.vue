@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <van-pull-refresh id='v2ex-list' v-model="isRefreshing" @refresh="onRefresh" success-text="刷新成功">
+        <van-pull-refresh v-model="isRefreshing" @refresh="onRefresh" success-text="刷新成功">
             <van-skeleton :row="3" :loading="isLoading" row-width="[100%,100%,100%]">
                 <van-cell v-show="!isLoading" v-for="(item,index) in list" :key="item.id" :value="`${index+1}.${item.title}`" is-link class="cell-text" @click="jump2V2ex(item.url)" />
                 <van-divider>到底了</van-divider>
@@ -10,11 +10,6 @@
 </template>
 
 <script>
-import BetterScroll from 'better-scroll'
-let bs = new BetterScroll('#v2ex-list', {
-    movable: true,
-    zoom: true
-})
 
 export default {
     data() {
@@ -53,7 +48,6 @@ export default {
             //         this.$toast.fail(err);
             //         console.log('====> err的值为: ', err);
             //     });
-            cordova.plugin.http.setDataSerializer('json')
             window.cordova.plugin.http.get(
                 'https://api.mrcuriosity.org/sites/v2ex/items',
                 {},

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home'
+// import Home from '@/views/Home'
 import Camera from '@/views/Camera'
 import Fund from '@/views/Fund'
 import Login from '@/views/Login'
@@ -12,8 +12,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Home',
-            component: Home
+            name: 'Fund',
+            component: Fund
         },
         {
             path: '/camera',
