@@ -20,5 +20,6 @@ yarn-error.log*
 *.sln
 *.sw*
 
+cordova_app/*
 cordova_app/www/*
 cordova_app/platform/*
