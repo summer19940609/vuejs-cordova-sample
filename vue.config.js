@@ -1,12 +1,4 @@
 module.exports = {
-    pluginOptions: {
-        i18n: {
-            locale: 'fr',
-            fallbackLocale: 'en',
-            localeDir: 'locales',
-            enableInSFC: false
-        }
-    },
     devServer: {
         open: true,
         host: 'localhost',
@@ -26,11 +18,6 @@ module.exports = {
     },
     publicPath: '',
     outputDir: 'cordova_app/www',
-    assetsDir: undefined,
-    runtimeCompiler: undefined,
-    productionSourceMap: undefined,
-    parallel: undefined,
-    css: undefined,
     configureWebpack: {
         'performance': {
             hints: false
