@@ -21,8 +21,8 @@
     <preference name="BackgroundColor" value="#FFFFFF" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#3f51b5" />
     <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#313AA5" />
     <preference name="HeaderColor" value="#313AA5" />
     <preference name="InAppBrowserStatusBarStyle" value="lightcontent" />
     <plugin name="cordova-plugin-android-window-background" spec="^1.0.1">

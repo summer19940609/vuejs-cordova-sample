@@ -20,6 +20,5 @@ yarn-error.log*
 *.sln
 *.sw*
 
-cordova_app/
-**/www/**
-cordova_app/www/index.html
+cordova_app/www/*
+cordova_app/platform/*

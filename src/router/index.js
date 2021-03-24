@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import Home from '@/views/Home'
-import Camera from '@/views/Camera'
 import Fund from '@/views/Fund'
 import Login from '@/views/Login'
 import V2ex from '@/views/V2ex'
@@ -14,11 +13,6 @@ export default new Router({
             path: '/',
             name: 'Fund',
             component: Fund
-        },
-        {
-            path: '/camera',
-            name: 'Camera',
-            component: Camera
         },
         {
             path: '/fund',

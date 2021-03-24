@@ -1,0 +1,64 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-android-window-background": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-camera": {
+      "CAMERA_USAGE_DESCRIPTION": " ",
+      "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-flashlight": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-geolocation": {
+      "GEOLOCATION_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-headercolor": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-wkwebviewxhrfix": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "phonegap-nfc": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "@globules-io/cordova-plugin-ios-xhr": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    },
+    "cordova-plugin-advanced-http": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "vuejs.cordova.sample"
+    }
+  }
+}

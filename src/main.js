@@ -27,6 +27,7 @@ document.addEventListener("deviceready", () => {
     // eslint-disable-next-line
     console.log("Ready, Render the App");
     init();
+    window.open = window.cordova.InAppBrowser.open;
 });
 
 // If we are not in Cordova, manually trigger the deviceready event
