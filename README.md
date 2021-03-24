@@ -1,10 +1,8 @@
 # vue + cordova
 
-![m5A497](https://gitee.com/summer19940609/pic/raw/master/uPic/m5A497.jpg)
-
-![ovNzzD](https://gitee.com/summer19940609/pic/raw/master/uPic/ovNzzD.jpg)
-
-
+![CekSR9](https://cdn.jsdelivr.net/gh/summer19940609/picture-repo@master/uPic/CekSR9.png)
+![uzPSHN](https://cdn.jsdelivr.net/gh/summer19940609/picture-repo@master/uPic/uzPSHN.png)
+![pK0s0m](https://cdn.jsdelivr.net/gh/summer19940609/picture-repo@master/uPic/pK0s0m.png)
 ## 步骤
 
 ```bash
