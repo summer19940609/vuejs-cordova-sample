@@ -2,9 +2,9 @@
     <v-app toolbar>
         <myToolbar />
         <v-content>
-            <Loading v-show="LOADING"></Loading>
             <v-slide-y-transition mode="out-in">
                 <v-container class="main-container">
+                    <Loading v-show="LOADING"></Loading>
                     <router-view></router-view>
                 </v-container>
             </v-slide-y-transition>
