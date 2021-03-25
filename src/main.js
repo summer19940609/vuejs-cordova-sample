@@ -6,11 +6,12 @@ import router from './router/index';
 import axios from 'axios';
 import store from './vuex/store';
 import vantCompoents from '@/components/vant.config'
-
+import { NativeHttp } from "./libs/nativeHttp";
 // axios.defaults.withCredentials = true
-Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(vantCompoents)
+Vue.prototype.$axios = axios
+Vue.prototype.$nativeHttp = new NativeHttp
 
 const init = () => {
     new Vue({
