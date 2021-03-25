@@ -48,6 +48,7 @@ const config = {
     // }
 }
 
+// 打包去掉console.log
 if (process.env.NODE_ENV === 'production') {
     config.configureWebpack.plugins = [
         new UglifyJsPlugin({
