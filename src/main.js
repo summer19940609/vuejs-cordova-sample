@@ -5,6 +5,7 @@ import App from './App.vue';
 import router from './router/index';
 import axios from 'axios';
 import store from './vuex/store';
+// import 'lib-flexible/flexible.js'
 import vantCompoents from '@/components/vant.config'
 import { NativeHttp } from "./libs/nativeHttp";
 // axios.defaults.withCredentials = true
