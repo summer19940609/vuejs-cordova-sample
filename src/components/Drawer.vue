@@ -20,6 +20,8 @@ export default {
                 { icon: 'home', text: '基金', action: 'fund' },
                 { icon: 'home', text: 'v2ex热帖', action: 'v2ex' },
                 { icon: 'home', text: 'NGA', action: 'nga' },
+                { icon: 'home', text: '清除缓存', action: 'clear' },
+                { icon: 'home', text: '设置', action: 'setting' },
             ],
         };
     },
