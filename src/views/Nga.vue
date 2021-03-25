@@ -180,6 +180,8 @@ export default {
     padding-top: 10px;
 }
 .topic-item {
+    content-visibility: auto;
+    contain-intrinsic-size: 50px;
     border-bottom: 1px solid #e4e0cf;
 }
 .img-group {

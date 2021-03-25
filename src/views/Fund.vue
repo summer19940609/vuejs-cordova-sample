@@ -263,6 +263,8 @@ export default {
     border: 10px solid #ffffff;
     padding: 10px;
     margin: 0 0 10px 0;
+    content-visibility: auto;
+    contain-intrinsic-size: 200px;
 }
 .fund-detail-fs {
     text-align: left;
