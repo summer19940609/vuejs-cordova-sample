@@ -5,7 +5,7 @@ import App from './App.vue';
 import router from './router/index';
 import axios from 'axios';
 import store from './vuex/store';
-import vantCompoents from '@/libs/vant.config'
+import vantCompoents from '@/components/vant.config'
 
 // axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios
