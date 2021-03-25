@@ -13,6 +13,7 @@ import {
     Skeleton,
     Field,
     Button,
+    Divider
 } from 'vant';
 
 const components = {
@@ -30,7 +31,8 @@ const components = {
     Skeleton,
     Field,
     Button,
-};
+    Divider
+}
 
 const componentsHandler = {
     install(Vue) {

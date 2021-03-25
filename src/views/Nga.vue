@@ -64,22 +64,20 @@ export default {
                 this.totalPage = Math.ceil(data.total / this.pageSize);
             });
         },
-        handelTopic(fid, page) {
-            return new Promise(async (resolve, reject) => {
-                const { list, total } = await this.getNgaTopic( fid, String(page));
-                if (!list.length) {
-                    resolve([]);
-                } 
-                for (const v of list) {
-                    const data = await this.getReadDetail( String(v.tid), '1');
-                    v['__T'] = data.__T; // 主题详情
-                    const attachs = data.__T.post_misc_var.attachs;
-                    if (attachs && Array.isArray(attachs)) {
-                        v['img'] = attachs.map((k) => k.attachurl);
-                    }
+        async handelTopic(fid, page) {
+            const { list, total } = await this.getNgaTopic( fid, String(page));
+            if (!list.length) {
+                return Promise.resolve({ list: [], total: 0 });
+            }
+            for (const v of list) {
+                const data = await this.getReadDetail( String(v.tid), '1');
+                v['__T'] = data.__T; // 主题详情
+                const attachs = data.__T.post_misc_var.attachs;
+                if (attachs && Array.isArray(attachs)) {
+                    v['img'] = attachs.map((k) => k.attachurl);
                 }
-                resolve({ list, total });
-            });
+            }
+            return Promise.resolve({ list, total });
         },
         getNgaTopic(fid, page) {
             return new Promise((resolve, reject) => {
