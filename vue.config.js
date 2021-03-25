@@ -1,4 +1,6 @@
-module.exports = {
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
+const config = {
     devServer: {
         open: true,
         host: 'localhost',
@@ -19,9 +21,18 @@ module.exports = {
     publicPath: '',
     outputDir: 'cordova_app/www',
     configureWebpack: {
-        'performance': {
+        performance: {
             hints: false
-        }
+        },
+        plugins: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    compress: {
+                        drop_console: true,
+                    },
+                },
+            }),
+        ],
     },
     // chainWebpack: config => {
     //     config.module
@@ -36,3 +47,17 @@ module.exports = {
     //         })
     // }
 }
+
+if (process.env.NODE_ENV === 'production') {
+    config.configureWebpack.plugins = [
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                compress: {
+                    drop_console: true,
+                },
+            },
+        }),
+    ]
+}
+
+module.exports = config
