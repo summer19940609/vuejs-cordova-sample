@@ -65,12 +65,12 @@ export default {
             });
         },
         async handelTopic(fid, page) {
-            const { list, total } = await this.getNgaTopic( fid, String(page));
+            const { list, total } = await this.getNgaTopic(fid, String(page));
             if (!list.length) {
                 return Promise.resolve({ list: [], total: 0 });
             }
             for (const v of list) {
-                const data = await this.getReadDetail( String(v.tid), '1');
+                const data = await this.getReadDetail(String(v.tid), '1');
                 v['__T'] = data.__T; // 主题详情
                 const attachs = data.__T.post_misc_var.attachs;
                 if (attachs && Array.isArray(attachs)) {
@@ -100,7 +100,7 @@ export default {
                     let list = [];
                     if (Array.isArray(_T)) {
                         list = _T;
-                    } else if ( Object.prototype.toString.call(_T) === '[object Object]' ) {
+                    } else if (Object.prototype.toString.call(_T) === '[object Object]') {
                         list = Object.values(_T);
                     }
                     resolve({ list: list, total: res.data.__ROWS });
@@ -181,7 +181,6 @@ export default {
 }
 .topic-item {
     content-visibility: auto;
-    contain-intrinsic-size: 50px;
     border-bottom: 1px solid #e4e0cf;
 }
 .img-group {

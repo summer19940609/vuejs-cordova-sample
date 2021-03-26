@@ -11,7 +11,7 @@
 export default {
     name: 'home',
     created() {
-        this.$store.commit('setTitle', '主页')
+        this.$store.commit('setTitle', '主页');
     },
     methods: {
         openMenu: () => {
@@ -23,5 +23,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -32,39 +32,18 @@ export default {
             }, 1000)
         },
         getV2exHot() {
-            // this.$axios
-            //     .get('https://api.mrcuriosity.org/sites/v2ex/items')
-            //     .then(res => {
-            //         console.log('====> res的值为: ', res);
-            //         if (res.status !== 200) {
-            //             this.$toast.fail('error');
-            //             return;
-            //         }
-            //         this.list = res.data;
-            //         this.isLoading = false
-            //     })
-            //     .catch(err => {
-            //         this.$toast.fail(err);
-            //         console.log('====> err的值为: ', err);
-            //     });
-            window.cordova.plugin.http.get(
-                'https://api.mrcuriosity.org/sites/v2ex/items',
-                {},
-                {},
-                res => {
-                    if (res.status !== 200) {
-                        console.log('获取数据失败')
-                        this.$toast.fail('获取数据失败')
-                    }
-                    this.$toast.success('获取数据成功')
-                    this.list = JSON.parse(res.data)
-                    this.isLoading = false
-                },
-                err => {
-                    console.log(JSON.stringify(err))
-                    this.$toast.fail(err)
+            window.cordova.plugin.http.get('https://api.mrcuriosity.org/sites/v2ex/items', {}, {}, res => {
+                if (res.status !== 200) {
+                    console.log('获取数据失败')
+                    this.$toast.fail('获取数据失败')
                 }
-            )
+                this.$toast.success('获取数据成功')
+                this.list = JSON.parse(res.data)
+                this.isLoading = false
+            }, err => {
+                console.log(JSON.stringify(err))
+                this.$toast.fail(err)
+            })
         },
         jump2V2ex(url) {
             window.open(url, '_blank', 'zoom=no')
