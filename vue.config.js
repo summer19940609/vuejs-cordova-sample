@@ -1,4 +1,4 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const config = {
     lintOnSave: false,
@@ -26,13 +26,7 @@ const config = {
             hints: false
         },
         plugins: [
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    compress: {
-                        drop_console: true,
-                    },
-                },
-            }),
+            
         ],
     },
     // chainWebpack: config => {
