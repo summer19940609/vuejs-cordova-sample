@@ -50,16 +50,16 @@ const config = {
 }
 
 // 打包去掉console.log
-if (process.env.NODE_ENV === 'production') {
-    config.configureWebpack.plugins = [
-        new UglifyJsPlugin({
-            uglifyOptions: {
-                compress: {
-                    drop_console: true,
-                },
-            },
-        }),
-    ]
-}
+// if (process.env.NODE_ENV === 'production') {
+//     config.configureWebpack.plugins = [
+//         new UglifyJsPlugin({
+//             uglifyOptions: {
+//                 compress: {
+//                     drop_console: true,
+//                 },
+//             },
+//         }),
+//     ]
+// }
 
 module.exports = config

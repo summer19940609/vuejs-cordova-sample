@@ -13,14 +13,17 @@ export default {
         };
     },
     mounted() {
-
+        this.go2Login()
+        const cookie = localStorage.getItem('ngaCookie')
+        console.log(`====> ngaCookie => ${JSON.stringify(cookie)}`)
     },
     methods: {
-
-    },
-};
+        go2Login() {
+            window.open('https://bbs.nga.cn/nuke/account_copy.html?login', '_blank', 'zoom=no')
+        },
+    }
+}
 </script>
 
 <style scoped>
-
 </style>
