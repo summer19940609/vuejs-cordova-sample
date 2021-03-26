@@ -1,6 +1,7 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const config = {
+    lintOnSave: false,
     devServer: {
         open: true,
         host: 'localhost',
