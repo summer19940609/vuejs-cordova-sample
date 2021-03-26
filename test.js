@@ -1,15 +1,34 @@
 const axios = require('axios')
-axios
-    .get('http://bbs.nga.cn/thread.php?fid=706&page=1&lite=js&noprefix', {
-        headers: {
-            Cookie: 'ngaPassportCid=X948giosc9s0t6t9h6s900eo7m945tou5dtl85fr; ngaPassportUid=62671744;'
-        },
-        withCredentials: true
-    })
-    .then(res => {
-        const data = res.data
-        console.log('====> data的值为: ', data);
-    })
-    .catch(err => {
-        console.log('====> err的值为: ', JSON.stringify(err))
-    })
+const CRC32 = require('crc32')
+const md5 = require('md5')
+const dayjs = require('dayjs')
+
+// 测试nga登录接口
+axios({
+    method: 'post',
+    responseType: 'json',
+    url: 'https://bbs.nga.cn/nuke.php',
+    params: {
+        '__lib': 'login',
+        '__act': 'login',
+        'name': 'verygoodbye',
+        'password': 'xnj19940609',
+        'type': 'id',
+        '__output': '11',
+        '__inchst': 'GBK',
+        '__ngaClientChecksum': getNgaClientChecksum('xnj19940609'),
+    }
+}).then(res => {
+    console.log('====> res.data: ', res.data);
+}).catch(err => {
+    console.log('====> err的值为: ', JSON.stringify(err))
+})
+
+function getNgaClientChecksum(password) {
+    const secret = '3ebd769858c56bd345898154e4b44427'
+    const currTime = dayjs().unix()
+    const crc32 = CRC32(password)
+    const str = `${crc32}${secret}${currTime}`
+    const ngaClientChecksum = `${md5(str)}${currTime}`
+    return ngaClientChecksum
+}
