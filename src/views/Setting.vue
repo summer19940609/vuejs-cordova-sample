@@ -51,20 +51,17 @@ export default {
             };
             console.log(`====> params => ${JSON.stringify(params)}`)
             this.$nativeHttp.post('https://bbs.nga.cn/nuke.php', options).then(res => {
-                console.log(`====> res => ${JSON.stringify(res)}`)
+
             }, err => {
-                console.log(`====> err => ${JSON.stringify(err)}`)
+                
             });
         },
         getNgaClientChecksum() {
             const secret = '3ebd769858c56bd345898154e4b44427'
             const currTime = dayjs().unix()
             const crc32 = CRC32('xnj19940609')
-            console.log(`====> crc32 => ${JSON.stringify(crc32)}`)
             const str = `${crc32}${secret}${currTime}`
-            console.log(`====> str => ${JSON.stringify(str)}`)
             const ngaClientChecksum = `${md5(str)}${currTime}`
-            console.log(`====> ngaClientChecksum => ${JSON.stringify(ngaClientChecksum)}`)
             return ngaClientChecksum
         }
     }
