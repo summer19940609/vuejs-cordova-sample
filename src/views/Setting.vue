@@ -53,7 +53,7 @@ export default {
             this.$nativeHttp.post('https://bbs.nga.cn/nuke.php', options).then(res => {
 
             }, err => {
-                
+
             });
         },
         getNgaClientChecksum() {
