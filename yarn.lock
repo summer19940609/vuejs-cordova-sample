@@ -1250,7 +1250,12 @@
   "resolved" "https://registry.npmjs.org/acorn/-/acorn-5.7.4.tgz"
   "version" "5.7.4"
 
-"acorn@^6.1.1", "acorn@^6.4.1":
+"acorn@^6.1.1":
+  "integrity" "sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ=="
+  "resolved" "https://registry.npmjs.org/acorn/-/acorn-6.4.2.tgz"
+  "version" "6.4.2"
+
+"acorn@^6.4.1":
   "integrity" "sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ=="
   "resolved" "https://registry.npmjs.org/acorn/-/acorn-6.4.2.tgz"
   "version" "6.4.2"
@@ -7137,7 +7142,12 @@
     "range-parser" "~1.2.1"
     "statuses" "~1.5.0"
 
-"serialize-javascript@^1.4.0", "serialize-javascript@^1.7.0":
+"serialize-javascript@^1.4.0":
+  "integrity" "sha512-0Vb/54WJ6k5v8sSWN09S0ora+Hnr+cX40r9F170nT+mSkaxltoE/7R3OrIdBSUv1OoiobH1QoWQbCnAO+e8J1A=="
+  "resolved" "https://registry.npmjs.org/serialize-javascript/-/serialize-javascript-1.9.1.tgz"
+  "version" "1.9.1"
+
+"serialize-javascript@^1.7.0":
   "integrity" "sha512-0Vb/54WJ6k5v8sSWN09S0ora+Hnr+cX40r9F170nT+mSkaxltoE/7R3OrIdBSUv1OoiobH1QoWQbCnAO+e8J1A=="
   "resolved" "https://registry.npmjs.org/serialize-javascript/-/serialize-javascript-1.9.1.tgz"
   "version" "1.9.1"
@@ -7953,9 +7963,9 @@
   "version" "0.0.6"
 
 "uglify-js@^3.6.0":
-  "integrity" "sha512-SbMu4D2Vo95LMC/MetNaso1194M1htEA+JrqE9Hk+G2DhI+itfS9TRu9ZKeCahLDNa/J3n4MqUJ/fOHMzQpRWw=="
-  "resolved" "https://registry.npmjs.org/uglify-js/-/uglify-js-3.13.2.tgz"
-  "version" "3.13.2"
+  "integrity" "sha512-otIc7O9LyxpUcQoXzj2hL4LPWKklO6LJWoJUzNa8A17Xgi4fOeDC8FBDOLHnC/Slo1CQgsZMcM6as0M76BZaig=="
+  "resolved" "https://registry.npmjs.org/uglify-js/-/uglify-js-3.13.3.tgz"
+  "version" "3.13.3"
 
 "uglify-js@3.4.x":
   "integrity" "sha512-Y2VsbPVs0FIshJztycsO2SfPk7/KAF/T72qzv9u5EpQ4kB2hQoHlhNQTsNyy6ul7lQtqJN/AoWeS23OzEiEFxw=="
