@@ -52,8 +52,8 @@ export default {
             }
             console.log(`====> params => ${JSON.stringify(params)}`)
             this.$nativeHttp.post('https://bbs.nga.cn/nuke.php', options).then(
-                res => {},
-                err => {}
+                () => {},
+                () => {}
             )
         },
         getNgaClientChecksum() {
