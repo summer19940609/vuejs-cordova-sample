@@ -1,8 +1,8 @@
 export class NativeHttp {
 
-    post(url, options) {
+    curl(url, options) {
         return new Promise((resolve, reject) => {
-            window.cordova.plugin.http.clearCookies()
+            // window.cordova.plugin.http.clearCookies()
             window.cordova.plugin.http.sendRequest(url, options, (res) => {
                 console.log(`====> [${url}的res.data为] => ${JSON.stringify(res.data)}`)
                 resolve(res.data)
@@ -13,4 +13,16 @@ export class NativeHttp {
         })
     }
 
+    setDataSerializer(string) {
+        window.cordova.plugin.http.setDataSerializer(string)
+    }
+
+    createFormData(data) {
+        const formData = new window.cordova.plugin.http.ponyfills.FormData()
+        for (const key in data) {
+            const value = data[key]
+            formData.append(key, value)
+        }
+        return formData
+    }
 }

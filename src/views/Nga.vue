@@ -94,7 +94,7 @@ export default {
                     responseType: 'json',
                     timeout: 10,
                 };
-                this.$nativeHttp.post('https://bbs.nga.cn/thread.php', options).then(res => {
+                this.$nativeHttp.curl('https://bbs.nga.cn/thread.php', options).then(res => {
                     const _T = res.data.__T;
                     console.log(`====> [_T] => ${JSON.stringify(_T)}`)
                     let list = [];
@@ -125,7 +125,7 @@ export default {
                     responseType: 'json',
                     timeout: 10,
                 };
-                this.$nativeHttp.post(`https://bbs.nga.cn/read.php`, options).then(res => {
+                this.$nativeHttp.curl(`https://bbs.nga.cn/read.php`, options).then(res => {
                     resolve(res.data);
                 }, err => {
                     reject(err)
