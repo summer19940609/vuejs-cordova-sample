@@ -36,12 +36,13 @@ export default {
         }
     },
     mounted() {
-        this.loadAuthCode()
+        // this.loadAuthCode()
     },
     methods: {
         onSubmit({ username, password }) {
             this.formShow = false
             this.codeShow = true
+            this.loadAuthCode()
         },
         // ngaLogin() {
         //     const ngaHeader = {
@@ -131,9 +132,23 @@ export default {
                 }
             }
             this.$nativeHttp.curl(`https://bbs.nga.cn/nuke.php`, loginOptions).then(
-                data => {},
+                res => {
+                    const data = res.data
+                    if (data[0] === '登录成功') {
+                        const ngaPassportUid = data[1]
+                        const ngaPassportCid = data[2]
+                        const cookie = {
+                            ngaPassportUid,
+                            ngaPassportCid
+                        }
+                        const userInfo = data[3]
+                        localStorage.setItem('ngaCookie', JSON.stringify(cookie))
+                        localStorage.setItem('userInfo', JSON.stringify(userInfo))
+                        this.$toast.success('登录成功')
+                    }
+                },
                 err => {
-                    this.$toast.fail(JSON.stringify(err.error))
+                    this.$toast.fail(JSON.stringify(err))
                 }
             )
         },
