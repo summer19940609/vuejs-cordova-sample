@@ -6,7 +6,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         LOADING: false,
-        TITLE: 'cordova+vue'
+        TITLE: 'cordova+vue',
+        userInfo: {}
     },
     mutations: {
         showLoading(state) {
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
         },
         setTitle(state, title) {
             state.TITLE = title
+        },
+        setUserInfo(state, userInfo) {
+            state.userInfo = userInfo
         }
     }
 });

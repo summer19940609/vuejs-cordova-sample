@@ -22,6 +22,7 @@ export default {
                 { icon: 'home', text: 'NGA', action: 'nga' },
                 { icon: 'home', text: '清除缓存', action: 'clear' },
                 { icon: 'home', text: '设置', action: 'setting' },
+                { icon: 'home', text: '账号', action: 'profile' },
             ],
         };
     },
