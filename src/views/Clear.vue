@@ -13,7 +13,7 @@ export default {
         };
     },
     mounted() {
-
+        this.$store.commit('setTitle', '缓存')
     },
     methods: {
         clearStorage() {
