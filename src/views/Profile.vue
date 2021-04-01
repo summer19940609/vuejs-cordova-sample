@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <van-image width="100" height="100" :src="avatar" />
+        <van-image width="100" height="100" :src="userInfo.avatar" />
     </v-container>
 </template>
 
@@ -13,11 +13,11 @@ export default {
     },
     data() {
         return {
-            avatar: ''
+
         }
     },
     mounted() {
-        this.avatar = this.userInfo.avatar
+        
     },
     methods: {}
 }
