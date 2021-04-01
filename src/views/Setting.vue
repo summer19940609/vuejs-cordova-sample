@@ -36,14 +36,120 @@ export default {
         }
     },
     mounted() {
-        // this.loadAuthCode()
+        this.$store.commit('setTitle', 'NGA登录')
     },
     methods: {
-        onSubmit({ username, password }) {
+        onSubmit() {
             this.formShow = false
-            this.codeShow = true
             this.loadAuthCode()
         },
+        getNgaClientChecksum() {
+            const secret = '3ebd769858c56bd345898154e4b44427'
+            const currTime = dayjs().unix()
+            const crc32 = CRC32('xnj19940609')
+            const str = `${crc32}${secret}${currTime}`
+            const ngaClientChecksum = `${md5(str)}${currTime}`
+            return ngaClientChecksum
+        },
+        loadAuthCode() {
+            const authCookie = '_' + Math.random()
+            this.authCodeCookie = authCookie
+            const url = `https://bbs.nga.cn/login_check_code.php?id=${authCookie}`
+            const options = {
+                method: 'get',
+                responseType: 'blob',
+                headers: {
+                    Referer: 'https://bbs.nga.cn/nuke/account_copy.html?login'
+                }
+            }
+            this.$store.commit('showLoading')
+            this.$nativeHttp.curl(url, options).then(
+                data => {
+                    this.blobToBase64(data)
+                        .then(res => {
+                            this.$store.commit('hideLoading')
+                            this.codeShow = true
+                            this.codePic = res
+                        })
+                        .catch(err => {
+                            this.$store.commit('hideLoading')
+                            this.$toast.fail(JSON.stringify(err))
+                        })
+                },
+                () => {
+                    this.$store.commit('hideLoading')
+                }
+            )
+        },
+        login() {
+            const params = {
+                name: this.username,
+                type: 'name',
+                password: this.password,
+                rid: this.authCodeCookie,
+                captcha: this.authCode.toUpperCase(),
+                __lib: 'login',
+                __act: 'login',
+                __output: 11,
+                __inchst: 'UTF-8',
+                raw: 3,
+                qrkey: ''
+            }
+            console.log(`==== [params] => ${JSON.stringify(params)}`)
+            this.$nativeHttp.setDataSerializer('multipart')
+            const formData = this.$nativeHttp.createFormData(params)
+            const loginOptions = {
+                method: 'post',
+                data: formData,
+                responseType: 'json',
+                headers: {
+                    Referer: 'https://bbs.nga.cn/nuke/account_copy.html?login',
+                    'Content-Type': 'multipart/form-data;'
+                }
+            }
+            this.$store.commit('showLoading')
+            this.$nativeHttp.curl(`https://bbs.nga.cn/nuke.php`, loginOptions).then(
+                res => {
+                    this.$store.commit('hideLoading')
+                    const data = res.data
+                    const error = res.error
+                    if (error) {
+                        this.$toast.fail(JSON.stringify(error))
+                        return
+                    }
+                    if (data[0] === '登录成功') {
+                        const ngaPassportUid = data[1]
+                        const ngaPassportCid = data[2]
+                        const cookie = {
+                            ngaPassportUid,
+                            ngaPassportCid
+                        }
+                        const userInfo = data[3]
+                        localStorage.setItem('ngaCookie', JSON.stringify(cookie))
+                        localStorage.setItem('userInfo', JSON.stringify(userInfo))
+                        this.$toast.success('登录成功')
+                    }
+                },
+                err => {
+                    this.$store.commit('hideLoading')
+                    this.$toast.fail(JSON.stringify(err))
+                }
+            )
+        },
+        // blob => base64
+        blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader()
+                fileReader.onload = e => {
+                    resolve(e.target.result)
+                }
+                // readAsDataURL
+                fileReader.readAsDataURL(blob)
+                fileReader.onerror = () => {
+                    reject(new Error('blobToBase64 error'))
+                }
+            })
+        }
         // ngaLogin() {
         //     const ngaHeader = {
         //         'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36 AndroidNGAOS/',
@@ -77,95 +183,6 @@ export default {
         //         () => {}
         //     )
         // },
-        getNgaClientChecksum() {
-            const secret = '3ebd769858c56bd345898154e4b44427'
-            const currTime = dayjs().unix()
-            const crc32 = CRC32('xnj19940609')
-            const str = `${crc32}${secret}${currTime}`
-            const ngaClientChecksum = `${md5(str)}${currTime}`
-            return ngaClientChecksum
-        },
-        loadAuthCode() {
-            const authCookie = '_' + Math.random()
-            this.authCodeCookie = authCookie
-            const url = `https://bbs.nga.cn/login_check_code.php?id=${authCookie}`
-            const options = {
-                method: 'get',
-                responseType: 'blob',
-                headers: {
-                    Referer: 'https://bbs.nga.cn/nuke/account_copy.html?login'
-                }
-            }
-            this.$nativeHttp.curl(url, options).then(
-                data => {
-                    this.blobToBase64(data).then(res => {
-                        this.codePic = res
-                    })
-                },
-                err => {}
-            )
-        },
-        login() {
-            const params = {
-                name: this.username,
-                type: 'name',
-                password: this.password,
-                rid: this.authCodeCookie,
-                captcha: this.authCode.toUpperCase(),
-                __lib: 'login',
-                __act: 'login',
-                __output: 11,
-                __inchst: 'UTF-8',
-                raw: 3,
-                qrkey: ''
-            }
-            console.log(`==== [params] => ${JSON.stringify(params)}`)
-            this.$nativeHttp.setDataSerializer('multipart')
-            const formData = this.$nativeHttp.createFormData(params)
-            const loginOptions = {
-                method: 'post',
-                data: formData,
-                responseType: 'json',
-                headers: {
-                    Referer: 'https://bbs.nga.cn/nuke/account_copy.html?login',
-                    'Content-Type': 'multipart/form-data;'
-                }
-            }
-            this.$nativeHttp.curl(`https://bbs.nga.cn/nuke.php`, loginOptions).then(
-                res => {
-                    const data = res.data
-                    if (data[0] === '登录成功') {
-                        const ngaPassportUid = data[1]
-                        const ngaPassportCid = data[2]
-                        const cookie = {
-                            ngaPassportUid,
-                            ngaPassportCid
-                        }
-                        const userInfo = data[3]
-                        localStorage.setItem('ngaCookie', JSON.stringify(cookie))
-                        localStorage.setItem('userInfo', JSON.stringify(userInfo))
-                        this.$toast.success('登录成功')
-                    }
-                },
-                err => {
-                    this.$toast.fail(JSON.stringify(err))
-                }
-            )
-        },
-        // blob => base64
-        blobToBase64(blob) {
-            return new Promise((resolve, reject) => {
-                const fileReader = new FileReader()
-                fileReader.onload = e => {
-                    resolve(e.target.result)
-                }
-                // readAsDataURL
-                fileReader.readAsDataURL(blob)
-                fileReader.onerror = () => {
-                    reject(new Error('blobToBase64 error'))
-                }
-            })
-        }
     }
 }
 </script>

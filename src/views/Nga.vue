@@ -16,7 +16,7 @@
 </template>
 
 <script>
-const ngaHeader = {
+let ngaHeader = {
     'User-Agent': 'Mozilla/5.0 (Macintosh Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
     Host: 'bbs.nga.cn',
     Connection: 'keep-alive',
@@ -39,11 +39,13 @@ export default {
             finished: false,
             page: 1,
             totalPage: 1,
-            total: 1
+            total: 1,
+            ngaCookie: ''
         }
     },
     created() {
         this.$store.commit('setTitle', '大时代')
+        this.setNgaCookie()
     },
     mounted() {
         this.fetchTopic()
@@ -55,11 +57,14 @@ export default {
                 ngaHeader.Cookie = ngaCookie
             }
         },
+        setNgaCookie() {
+            let ngaCookie = localStorage.getItem('ngaCookie')
+            this.ngaCookie = ngaCookie
+            ngaHeader.Cookie = ngaCookie
+        },
         fetchTopic() {
-            // this.$store.commit('showLoading')
             this.loading = true
             this.handelTopic(this.fid, this.page).then(data => {
-                // this.$store.commit('hideLoading')
                 this.loading = false
                 this.list = this.list.concat(data.list)
                 this.total = data.total
@@ -160,11 +165,6 @@ export default {
                 this.finished = true
             }
         },
-        destroy() {
-            if (this.$store.state.LOADING) {
-                this.$store.commit('hideLoading')
-            }
-        }
     }
 }
 </script>
