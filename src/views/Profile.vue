@@ -1,23 +1,20 @@
 <template>
     <v-container>
-        <van-image width="100" height="100" :src="userInfo.avatar" />
+        <van-image width="100" height="100" :src="avatar" />
+        <img :src="avatar" alt="" />
     </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
     name: 'profile',
-    computed: {
-        ...mapState(['userInfo'])
-    },
     data() {
         return {
-
+            avatar: ''
         }
     },
     mounted() {
-        
+        this.avatar = this.$store.state.userInfo.avatar
     },
     methods: {}
 }
