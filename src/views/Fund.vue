@@ -71,34 +71,43 @@ export default {
     data() {
         return {
             isLoading: false,
-            fundList: [],       // 页面个人基金展示信息
-            fundIndexList: [],      // 大盘指数
-            skeletonLoading: true,      // 控制骨架屏显示
+            fundList: [], // 页面个人基金展示信息
+            fundIndexList: [], // 大盘指数
+            skeletonLoading: true, // 控制骨架屏显示
             indexSkeletonLoading: true,
-            hasSync: false
-        };
+            hasSync: false,
+            timer: null // 定时器名称
+        }
     },
     created() {
         this.$store.commit('setTitle', '基金')
     },
     mounted() {
-        this.getFundIndexData();
-        this.initData();
+        this.getFundIndexData()
+        this.initData()
+        // 定时器 30s
+        const timer = setInterval(() => {
+            this.getFundIndexData()
+            this.initData()
+        }, 30000)
+        this.$once('hook:beforeDestroy', () => {
+            clearInterval(timer)
+        })
     },
     methods: {
         openMenu: () => {
-            document.dispatchEvent(new CustomEvent('toggleDrawer', {}));
+            document.dispatchEvent(new CustomEvent('toggleDrawer', {}))
         },
         // 下拉刷新
         onRefresh() {
             const currTime = dayjs().format('HH:mm')
             if (currTime < '15:00') {
-                this.getFundIndexData();
-                this.initData();
+                this.getFundIndexData()
+                this.initData()
             }
             setTimeout(() => {
-                this.isLoading = false;
-            }, 1000);
+                this.isLoading = false
+            }, 1000)
         },
         // 整合数据，展示
         async initData() {
@@ -106,21 +115,21 @@ export default {
             if (!x2rrFundList) {
                 return
             }
-            x2rrFundList = JSON.parse(x2rrFundList);
-            const fundCodeList = x2rrFundList.map(v => v.code);
-            const fundInfoList = await this.getFundInfo(fundCodeList);
-            let dayIncome = 0;
-            let totalMoney = 0;
-            x2rrFundList = x2rrFundList.map((v) => {
-                const fund = fundInfoList.find((k) => k['FCODE'] == v.code);
-                v = { ...v, ...fund };
-                v['CYJE'] = (v.num * v.NAV).toFixed(2);     // 持有金额
-                v['GSSY'] = (v.CYJE * v.GSZZL / 100).toFixed(2);     // 估算收益
-                v['GZTIME'] = dayjs(v.GZTIME).format('HH:mm');
+            x2rrFundList = JSON.parse(x2rrFundList)
+            const fundCodeList = x2rrFundList.map(v => v.code)
+            const fundInfoList = await this.getFundInfo(fundCodeList)
+            let dayIncome = 0
+            let totalMoney = 0
+            x2rrFundList = x2rrFundList.map(v => {
+                const fund = fundInfoList.find(k => k['FCODE'] == v.code)
+                v = { ...v, ...fund }
+                v['CYJE'] = (v.num * v.NAV).toFixed(2) // 持有金额
+                v['GSSY'] = ((v.CYJE * v.GSZZL) / 100).toFixed(2) // 估算收益
+                v['GZTIME'] = dayjs(v.GZTIME).format('HH:mm')
                 dayIncome += Number(v.GSSY)
                 totalMoney += Number(v.CYJE)
                 return v
-            });
+            })
             this.fundList = x2rrFundList
             this.dayIncome = dayIncome.toFixed(2)
             const dayIncomePercent = ((dayIncome / totalMoney) * 100).toFixed(2)
@@ -132,72 +141,67 @@ export default {
         getX2rrFundsData(username, password) {
             return new Promise((resovle, reject) => {
                 this.$axios
-                    .post(
-                        'https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center',
-                        {
-                            action: 'login',
-                            params: {
-                                username: username,
-                                password: password,
-                            },
-                        },
-                    )
-                    .then((res) => {
-                        console.log('====> 获取x2rr备份的个人基金数据的值为: ', res);
-                        if (res.data.code != 0) {
-                            resovle({ 'err': res.data.message, 'fundList': null })
+                    .post('https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center', {
+                        action: 'login',
+                        params: {
+                            username: username,
+                            password: password
                         }
-                        const fundConfig = JSON.parse(res.data.userInfo.config_data);
-                        const fundList = fundConfig.fundListM;
-                        localStorage.setItem('x2rrFundList', JSON.stringify(fundList))
-                        resovle({ 'err': null, 'fundList': fundList })
                     })
-                    .catch((err) => {
-                        this.$toast.fail(err);
-                        console.log('====> err的值为: ', err);
-                        reject({ 'err': err, 'fundList': null })
-                    });
+                    .then(res => {
+                        console.log('====> 获取x2rr备份的个人基金数据的值为: ', res)
+                        if (res.data.code != 0) {
+                            resovle({ err: res.data.message, fundList: null })
+                        }
+                        const fundConfig = JSON.parse(res.data.userInfo.config_data)
+                        const fundList = fundConfig.fundListM
+                        localStorage.setItem('x2rrFundList', JSON.stringify(fundList))
+                        resovle({ err: null, fundList: fundList })
+                    })
+                    .catch(err => {
+                        this.$toast.fail(err)
+                        console.log('====> err的值为: ', err)
+                        reject({ err: err, fundList: null })
+                    })
             })
         },
         // 获取指数
         getFundIndexData() {
             this.$axios
-                .get(
-                    'https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&fields=f2,f3,f4,f12,f13,f14&secids=1.000001,1.000300,0.399001,0.399006&_=1615516863425',
-                )
-                .then((data) => {
-                    const fundIndexList = data.data.data.diff;
-                    this.fundIndexList = fundIndexList;
+                .get('https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&fields=f2,f3,f4,f12,f13,f14&secids=1.000001,1.000300,0.399001,0.399006&_=1615516863425')
+                .then(data => {
+                    const fundIndexList = data.data.data.diff
+                    this.fundIndexList = fundIndexList
                     this.indexSkeletonLoading = false
                 })
-                .catch((err) => {
-                    this.$toast.fail(err);
-                    console.log('====> err的值为: ', err);
-                });
+                .catch(err => {
+                    this.$toast.fail(err)
+                    console.log('====> err的值为: ', err)
+                })
         },
         // 获取基金信息
         getFundInfo(fundCodeList) {
             return new Promise((resolve, reject) => {
-                const url = `https://fundmobapi.eastmoney.com/FundMNewApi/FundMNFInfo?pageIndex=1&pageSize=200&plat=Android&appType=ttjj&product=EFund&Version=1&deviceid=c6a12d28-1e46-46df-bd62-d543d600b464&Fcodes=${fundCodeList.join(',')}`;
+                const url = `https://fundmobapi.eastmoney.com/FundMNewApi/FundMNFInfo?pageIndex=1&pageSize=200&plat=Android&appType=ttjj&product=EFund&Version=1&deviceid=c6a12d28-1e46-46df-bd62-d543d600b464&Fcodes=${fundCodeList.join(',')}`
                 this.$axios
                     .get(url)
-                    .then((data) => {
-                        console.log('====> 获取基金信息接口返回的值为: ', data);
-                        const fundInfoList = data.data.Datas || [];
-                        resolve(fundInfoList);
+                    .then(data => {
+                        console.log('====> 获取基金信息接口返回的值为: ', data)
+                        const fundInfoList = data.data.Datas || []
+                        resolve(fundInfoList)
                     })
-                    .catch((err) => {
-                        console.log('====> err的值为: ', err);
-                        this.$toast.fail(err);
-                        reject(err);
-                    });
-            });
+                    .catch(err => {
+                        console.log('====> err的值为: ', err)
+                        this.$toast.fail(err)
+                        reject(err)
+                    })
+            })
         },
         jumpToSync() {
             this.$router.push('/login')
         }
-    },
-};
+    }
+}
 </script>
 
 <style scoped>
@@ -214,13 +218,15 @@ export default {
     height: 100%;
 }
 .fund-index-box {
-    font-size: 16px;
+    font-size: 18px;
     background-color: #ffffff;
+    border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
 }
 .fund-detail-box {
     margin-top: 10px;
+    border-radius: 10px;
 }
 .fund-detail-item {
     background-color: #ffffff;
@@ -260,6 +266,7 @@ export default {
     height: 100px;
     font-size: 24px;
     background-color: #ffffff;
+    border-radius: 10px;
     margin-top: 10px;
     display: flex;
     align-content: center;

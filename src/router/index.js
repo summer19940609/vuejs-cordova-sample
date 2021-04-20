@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import Home from '@/views/Home'
 import Fund from '@/views/Fund';
 import Login from '@/views/Login';
 import Clear from '@/views/Clear';
 import V2ex from '@/views/V2ex';
 import Nga from '@/views/Nga';
 import Setting from '@/views/Setting';
+import Profile from '@/views/Profile';
 Vue.use(Router);
 
 export default new Router({
@@ -45,6 +45,11 @@ export default new Router({
             path: '/setting',
             name: 'Setting',
             component: Setting,
+        },
+        {
+            path: '/profile',
+            name: 'Profile',
+            component: Profile,
         },
     ],
 });
